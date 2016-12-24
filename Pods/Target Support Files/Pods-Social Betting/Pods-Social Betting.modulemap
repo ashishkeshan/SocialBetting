@@ -1,0 +1,6 @@
+framework module Pods_Social_Betting {
+  umbrella header "Pods-Social Betting-umbrella.h"
+
+  export *
+  module * { export * }
+}
