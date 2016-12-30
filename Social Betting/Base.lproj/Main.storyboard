@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="t0V-fL-KdG">
             <objects>
-                <viewController id="ol6-DI-7wf" customClass="ViewController" customModule="Social_Betting" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ol6-DI-7wf" customClass="LoginViewController" customModule="Social_Betting" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1xZ-ij-QsD"/>
                         <viewControllerLayoutGuide type="bottom" id="6cM-lC-ulY"/>
@@ -36,9 +36,6 @@
                                 <rect key="frame" x="70" y="239" width="235" height="30"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
-                                <connections>
-                                    <outlet property="delegate" destination="ol6-DI-7wf" id="ET4-84-bQL"/>
-                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cHX-aM-nl9">
                                 <rect key="frame" x="70" y="289" width="235" height="30"/>
@@ -47,9 +44,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="ol6-DI-7wf" id="DLd-QS-2hk"/>
-                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dT2-zX-P2E">
                                 <rect key="frame" x="70" y="334" width="235" height="38"/>
@@ -68,7 +62,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="loginDidTouch:" destination="ol6-DI-7wf" eventType="touchUpInside" id="r6w-WZ-xYI"/>
+                                    <action selector="loginPressed:" destination="ol6-DI-7wf" eventType="touchUpInside" id="9HN-ro-R5C"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WFn-W6-kvK">
@@ -93,7 +87,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="signUpDidTouch:" destination="ol6-DI-7wf" eventType="touchUpInside" id="AG6-Km-jx8"/>
+                                    <action selector="signUpPressed:" destination="ol6-DI-7wf" eventType="touchUpInside" id="Xcc-97-h41"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -115,6 +109,10 @@
                             <constraint firstItem="dT2-zX-P2E" firstAttribute="leading" secondItem="cHX-aM-nl9" secondAttribute="leading" id="zzM-EY-V7y"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textFieldLogin" destination="HXA-0f-2cW" id="2Jd-ll-OW2"/>
+                        <outlet property="textFieldPassword" destination="cHX-aM-nl9" id="bPs-1i-dbW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vbG-Yn-p9u" sceneMemberID="firstResponder"/>
             </objects>

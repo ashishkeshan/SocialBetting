@@ -11,11 +11,17 @@ import Firebase
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var textFieldLogin: UITextField!
+    @IBOutlet weak var textFieldPassword: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
+    @IBAction func loginButton(_ sender: Any) {
+    }
 
+    @IBAction func signUpButton(_ sender: Any) {
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -7,5 +7,6 @@ target 'Social Betting' do
 
   # Pods for Social Betting
 pod 'Firebase/Core'
+pod 'Firebase/Auth'
 
 end

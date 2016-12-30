@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		752ADB9D1E0DED8D008BA7E4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 752ADB9C1E0DED8D008BA7E4 /* GoogleService-Info.plist */; };
 		752ADB9F1E0E3556008BA7E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752ADB9E1E0E3556008BA7E4 /* LoginViewController.swift */; };
+		752ADBA11E15E5FE008BA7E4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 752ADBA01E15E5FE008BA7E4 /* GoogleService-Info.plist */; };
 		75A618D11E0DE74400A0362E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A618D01E0DE74400A0362E /* AppDelegate.swift */; };
 		75A618D31E0DE74400A0362E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A618D21E0DE74400A0362E /* ViewController.swift */; };
 		75A618D61E0DE74400A0362E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75A618D41E0DE74400A0362E /* Main.storyboard */; };
@@ -20,8 +20,8 @@
 /* Begin PBXFileReference section */
 		1349983332A583D309A07FF0 /* Pods-Social Betting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social Betting.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Social Betting/Pods-Social Betting.debug.xcconfig"; sourceTree = "<group>"; };
 		61065E678781EF03087BC11C /* Pods_Social_Betting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Social_Betting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		752ADB9C1E0DED8D008BA7E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		752ADB9E1E0E3556008BA7E4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		752ADBA01E15E5FE008BA7E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75A618CD1E0DE74400A0362E /* Social Betting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Social Betting.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		75A618D01E0DE74400A0362E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75A618D21E0DE74400A0362E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -81,7 +81,7 @@
 				75A618D71E0DE74400A0362E /* Assets.xcassets */,
 				75A618D91E0DE74400A0362E /* LaunchScreen.storyboard */,
 				75A618DC1E0DE74500A0362E /* Info.plist */,
-				752ADB9C1E0DED8D008BA7E4 /* GoogleService-Info.plist */,
+				752ADBA01E15E5FE008BA7E4 /* GoogleService-Info.plist */,
 			);
 			path = "Social Betting";
 			sourceTree = "<group>";
@@ -157,9 +157,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				75A618DB1E0DE74400A0362E /* LaunchScreen.storyboard in Resources */,
+				752ADBA11E15E5FE008BA7E4 /* GoogleService-Info.plist in Resources */,
 				75A618D81E0DE74400A0362E /* Assets.xcassets in Resources */,
 				75A618D61E0DE74400A0362E /* Main.storyboard in Resources */,
-				752ADB9D1E0DED8D008BA7E4 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

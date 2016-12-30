@@ -7,15 +7,65 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var textFieldPassword: UITextField!
+    @IBOutlet weak var textFieldLogin: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func loginPressed(_ sender: Any) {
+        FIRAuth.auth()!.signIn(withEmail: textFieldLogin.text!,
+                               password: textFieldPassword.text!)
+    }
+    @IBAction func signUpPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "Register",
+                                      message: "Register",
+                                      preferredStyle: .alert)
+        
+        let saveAction = UIAlertAction(title: "Save", style: .default) { action in
+            // 1
+            let emailField = alert.textFields![0]
+            let passwordField = alert.textFields![1]
+            
+            // 2
+            FIRAuth.auth()!.createUser(withEmail: emailField.text!,
+                                       password: passwordField.text!) { user, error in
+                                        if error == nil {
+                                            // 3
+                                            FIRAuth.auth()!.signIn(withEmail: self.textFieldLogin.text!,
+                                                                   password: self.textFieldPassword.text!)
+                                        }
+                                        else{
+                                            print(error!)
+                                        }
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .default)
+        
+        alert.addTextField { textEmail in
+            textEmail.placeholder = "Enter your email"
+        }
+        
+        alert.addTextField { textPassword in
+            textPassword.isSecureTextEntry = true
+            textPassword.placeholder = "Enter your password"
+        }
+        
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
