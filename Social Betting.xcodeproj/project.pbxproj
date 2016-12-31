@@ -15,6 +15,7 @@
 		75A618D81E0DE74400A0362E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75A618D71E0DE74400A0362E /* Assets.xcassets */; };
 		75A618DB1E0DE74400A0362E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75A618D91E0DE74400A0362E /* LaunchScreen.storyboard */; };
 		9F5B70C84F9746A112474236 /* Pods_Social_Betting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61065E678781EF03087BC11C /* Pods_Social_Betting.framework */; };
+		B98F51661E184D5300BD11DF /* BetFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98F51651E184D5300BD11DF /* BetFeedTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		75A618DA1E0DE74400A0362E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		75A618DC1E0DE74500A0362E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B4410C77F552894DB3A0A78 /* Pods-Social Betting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social Betting.release.xcconfig"; path = "Pods/Target Support Files/Pods-Social Betting/Pods-Social Betting.release.xcconfig"; sourceTree = "<group>"; };
+		B98F51651E184D5300BD11DF /* BetFeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetFeedTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				75A618D21E0DE74400A0362E /* ViewController.swift */,
 				752ADB9E1E0E3556008BA7E4 /* LoginViewController.swift */,
 				75A618D41E0DE74400A0362E /* Main.storyboard */,
+				B98F51651E184D5300BD11DF /* BetFeedTableViewController.swift */,
 				75A618D71E0DE74400A0362E /* Assets.xcassets */,
 				75A618D91E0DE74400A0362E /* LaunchScreen.storyboard */,
 				75A618DC1E0DE74500A0362E /* Info.plist */,
@@ -193,7 +196,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C0CE94DB7BDB23CAA5098D13 /* [CP] Copy Pods Resources */ = {
@@ -220,6 +223,7 @@
 			files = (
 				752ADB9F1E0E3556008BA7E4 /* LoginViewController.swift in Sources */,
 				75A618D31E0DE74400A0362E /* ViewController.swift in Sources */,
+				B98F51661E184D5300BD11DF /* BetFeedTableViewController.swift in Sources */,
 				75A618D11E0DE74400A0362E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
