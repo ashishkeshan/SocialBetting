@@ -8,11 +8,15 @@
 
 import UIKit
 
-class BetFeedTableViewController: UITableViewController {
+//class FeedTableCell: UITableViewCell {
+//    
+//}
 
+class BetFeedTableViewController: UITableViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -34,18 +38,24 @@ class BetFeedTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 1
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
         // Configure the cell...
+        
+//        cell.Name1.text = "Ashish K."
+//        cell.Name2.text = "William W."
+//        cell.bet.text = "10 Pushups or 2 Shots"
+//        cell.numLikes.text = "Heart 100 People"
+//        cell.witnesses.text = "Witnesses"
 
         return cell
     }
-    */
+
 
     /*
     // Override to support conditional editing of the table view.

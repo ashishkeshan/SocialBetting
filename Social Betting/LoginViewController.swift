@@ -18,6 +18,11 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        FIRAuth.auth()!.addStateDidChangeListener() { auth, user in
+            if user != nil {
+                self.performSegue(withIdentifier: "showFeed", sender: nil)
+            }
+        }
     }
 
     @IBAction func loginPressed(_ sender: Any) {
@@ -41,6 +46,7 @@ class LoginViewController: UIViewController {
                                             // 3
                                             FIRAuth.auth()!.signIn(withEmail: self.textFieldLogin.text!,
                                                                    password: self.textFieldPassword.text!)
+                                            self.performSegue(withIdentifier: "showFeed", sender: self)
                                         }
                                         else{
                                             print(error!)
