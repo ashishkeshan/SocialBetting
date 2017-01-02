@@ -35,22 +35,16 @@ class LoginViewController: UIViewController {
                                       preferredStyle: .alert)
         
         let saveAction = UIAlertAction(title: "Save", style: .default) { action in
-            // 1
             let emailField = alert.textFields![0]
             let passwordField = alert.textFields![1]
-            
-            // 2
-            FIRAuth.auth()!.createUser(withEmail: emailField.text!,
-                                       password: passwordField.text!) { user, error in
-                                        if error == nil {
-                                            // 3
-                                            FIRAuth.auth()!.signIn(withEmail: self.textFieldLogin.text!,
-                                                                   password: self.textFieldPassword.text!)
-                                            self.performSegue(withIdentifier: "showFeed", sender: self)
-                                        }
-                                        else{
-                                            print(error!)
-                                        }
+            FIRAuth.auth()!.createUser(withEmail: emailField.text!, password: passwordField.text!) { user, error in
+                if error == nil {
+                    FIRAuth.auth()!.signIn(withEmail: self.textFieldLogin.text!, password: self.textFieldPassword.text!)
+                    self.performSegue(withIdentifier: "showFeed", sender: self)
+                }
+                else{
+                    print(error!)
+                }
             }
         }
         

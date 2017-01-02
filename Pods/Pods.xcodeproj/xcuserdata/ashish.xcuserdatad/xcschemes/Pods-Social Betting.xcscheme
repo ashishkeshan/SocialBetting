@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "52D8FD6CC55702245B6CF8BF205D3F71"
+               BlueprintIdentifier = "82A8F419C5CBB1A918F68EA4C4A17260"
                BuildableName = "Pods_Social_Betting.framework"
                BlueprintName = "Pods-Social Betting"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52D8FD6CC55702245B6CF8BF205D3F71"
+            BlueprintIdentifier = "82A8F419C5CBB1A918F68EA4C4A17260"
             BuildableName = "Pods_Social_Betting.framework"
             BlueprintName = "Pods-Social Betting"
             ReferencedContainer = "container:Pods.xcodeproj">

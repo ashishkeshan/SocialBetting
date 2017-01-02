@@ -6,11 +6,15 @@ use_frameworks!
 
 target 'Social Betting' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
-
+  
   # Pods for Social Betting
 	pod 'Firebase/Core'
 	pod 'Firebase/Auth'
 	pod 'Firebase/Database'
 	pod 'SlideMenuControllerSwift'
+    
+    pod 'FacebookCore'
+    pod 'FacebookLogin'
+    pod 'FacebookShare'
 
 end
