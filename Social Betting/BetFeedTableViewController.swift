@@ -7,10 +7,7 @@
 //
 
 import UIKit
-
-//class FeedTableCell: UITableViewCell {
-//    
-//}
+import Firebase
 
 class BetFeedTableViewController: UITableViewController {
     
@@ -33,7 +30,7 @@ class BetFeedTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,11 +40,12 @@ class BetFeedTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BetFeedCellTableViewCell", for: indexPath) as! BetFeedCellTableViewCell
 
         // Configure the cell...
         
-//        cell.Name1.text = "Ashish K."
+        cell.configureCell()
+        
 //        cell.Name2.text = "William W."
 //        cell.bet.text = "10 Pushups or 2 Shots"
 //        cell.numLikes.text = "Heart 100 People"

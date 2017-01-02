@@ -15,6 +15,7 @@
 		75A618D81E0DE74400A0362E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75A618D71E0DE74400A0362E /* Assets.xcassets */; };
 		75A618DB1E0DE74400A0362E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75A618D91E0DE74400A0362E /* LaunchScreen.storyboard */; };
 		9F5B70C84F9746A112474236 /* Pods_Social_Betting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61065E678781EF03087BC11C /* Pods_Social_Betting.framework */; };
+		B96781CC1E19AA2800609F23 /* BetFeedCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96781CB1E19AA2800609F23 /* BetFeedCellTableViewCell.swift */; };
 		B98F51661E184D5300BD11DF /* BetFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98F51651E184D5300BD11DF /* BetFeedTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		75A618DA1E0DE74400A0362E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		75A618DC1E0DE74500A0362E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B4410C77F552894DB3A0A78 /* Pods-Social Betting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social Betting.release.xcconfig"; path = "Pods/Target Support Files/Pods-Social Betting/Pods-Social Betting.release.xcconfig"; sourceTree = "<group>"; };
+		B96781CB1E19AA2800609F23 /* BetFeedCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetFeedCellTableViewCell.swift; sourceTree = "<group>"; };
 		B98F51651E184D5300BD11DF /* BetFeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetFeedTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +83,7 @@
 				752ADB9E1E0E3556008BA7E4 /* LoginViewController.swift */,
 				75A618D41E0DE74400A0362E /* Main.storyboard */,
 				B98F51651E184D5300BD11DF /* BetFeedTableViewController.swift */,
+				B96781CB1E19AA2800609F23 /* BetFeedCellTableViewCell.swift */,
 				75A618D71E0DE74400A0362E /* Assets.xcassets */,
 				75A618D91E0DE74400A0362E /* LaunchScreen.storyboard */,
 				75A618DC1E0DE74500A0362E /* Info.plist */,
@@ -221,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B96781CC1E19AA2800609F23 /* BetFeedCellTableViewCell.swift in Sources */,
 				752ADB9F1E0E3556008BA7E4 /* LoginViewController.swift in Sources */,
 				75A618D31E0DE74400A0362E /* ViewController.swift in Sources */,
 				B98F51661E184D5300BD11DF /* BetFeedTableViewController.swift in Sources */,
