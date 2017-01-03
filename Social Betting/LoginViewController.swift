@@ -8,19 +8,28 @@
 
 import UIKit
 import Firebase
+import FBSDKLoginKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var textFieldLogin: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let loginButton = FBSDKLoginButton()
+        loginButton.readPermissions = ["public_profile", "email", "user_friends"]
+        view.addSubview(loginButton)
+        //frame's are obselete, please use constraints instead because its 2016 after all
+        loginButton.frame = CGRect(x: 64, y: view.frame.height/1.5, width: view.frame.width - 128, height: 50)
+        
+        loginButton.delegate = self
+        
         // Do any additional setup after loading the view.
         FIRAuth.auth()!.addStateDidChangeListener() { auth, user in
             if user != nil {
-                self.performSegue(withIdentifier: "showFeed", sender: nil)
+                //self.performSegue(withIdentifier: "showFeed", sender: nil)
             }
         }
     }
@@ -64,6 +73,33 @@ class LoginViewController: UIViewController {
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
+    }
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        print("Did log out of facebook")
+        let firebaseAuth = FIRAuth.auth()
+        do {
+            try firebaseAuth?.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+    }
+    
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if error != nil {
+            print(error)
+            return
+        }
+        
+        let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+        FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+            // ...
+            if error != nil {
+                // ...
+                return
+            }
+        }
+        self.performSegue(withIdentifier: "showFeed", sender: nil)
+        print("Successfully logged in with facebook...")
     }
     
     override func didReceiveMemoryWarning() {

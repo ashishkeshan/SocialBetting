@@ -13,8 +13,8 @@ target 'Social Betting' do
 	pod 'Firebase/Database'
 	pod 'SlideMenuControllerSwift'
     
-    pod 'FacebookCore'
-    pod 'FacebookLogin'
-    pod 'FacebookShare'
+    pod 'FBSDKCoreKit'
+    pod 'FBSDKShareKit'
+    pod 'FBSDKLoginKit'
 
 end
