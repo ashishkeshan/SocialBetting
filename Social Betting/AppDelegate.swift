@@ -22,6 +22,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
+        // ----------------------- COMMENT BELOW TO SEE SLIDE MENU IN ACTION ------------------------ //
+        window = UIWindow(frame: UIScreen.main.bounds)
+
+        let containerViewController = ContainerViewController()
+
+        window!.rootViewController = containerViewController
+        window!.makeKeyAndVisible()
+        
+        // ---------------------------- END OF STUFF TO COMMENT OUT -------------------------------- //
+        
         return true
     }
     

@@ -17,6 +17,9 @@
 		9F5B70C84F9746A112474236 /* Pods_Social_Betting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61065E678781EF03087BC11C /* Pods_Social_Betting.framework */; };
 		B96781CC1E19AA2800609F23 /* BetFeedCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96781CB1E19AA2800609F23 /* BetFeedCellTableViewCell.swift */; };
 		B98F51661E184D5300BD11DF /* BetFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98F51651E184D5300BD11DF /* BetFeedTableViewController.swift */; };
+		B9B548BB1E1B414B00569631 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B548BA1E1B414B00569631 /* ContainerViewController.swift */; };
+		B9B548BE1E1B426300569631 /* tripleLines.png in Resources */ = {isa = PBXBuildFile; fileRef = B9B548BD1E1B426300569631 /* tripleLines.png */; };
+		B9B548C21E1B439B00569631 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B548C11E1B439B00569631 /* SideMenuViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		9B4410C77F552894DB3A0A78 /* Pods-Social Betting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social Betting.release.xcconfig"; path = "Pods/Target Support Files/Pods-Social Betting/Pods-Social Betting.release.xcconfig"; sourceTree = "<group>"; };
 		B96781CB1E19AA2800609F23 /* BetFeedCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetFeedCellTableViewCell.swift; sourceTree = "<group>"; };
 		B98F51651E184D5300BD11DF /* BetFeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetFeedTableViewController.swift; sourceTree = "<group>"; };
+		B9B548BA1E1B414B00569631 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		B9B548BD1E1B426300569631 /* tripleLines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tripleLines.png; sourceTree = "<group>"; };
+		B9B548C11E1B439B00569631 /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,10 +84,13 @@
 		75A618CF1E0DE74400A0362E /* Social Betting */ = {
 			isa = PBXGroup;
 			children = (
+				B9B548BC1E1B425500569631 /* Images */,
 				75A618D01E0DE74400A0362E /* AppDelegate.swift */,
 				75A618D21E0DE74400A0362E /* ViewController.swift */,
 				752ADB9E1E0E3556008BA7E4 /* LoginViewController.swift */,
 				75A618D41E0DE74400A0362E /* Main.storyboard */,
+				B9B548BA1E1B414B00569631 /* ContainerViewController.swift */,
+				B9B548C11E1B439B00569631 /* SideMenuViewController.swift */,
 				B98F51651E184D5300BD11DF /* BetFeedTableViewController.swift */,
 				B96781CB1E19AA2800609F23 /* BetFeedCellTableViewCell.swift */,
 				75A618D71E0DE74400A0362E /* Assets.xcassets */,
@@ -98,6 +107,14 @@
 				61065E678781EF03087BC11C /* Pods_Social_Betting.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B9B548BC1E1B425500569631 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				B9B548BD1E1B426300569631 /* tripleLines.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,6 +152,7 @@
 				TargetAttributes = {
 					75A618CC1E0DE74400A0362E = {
 						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = CKF73J7D4M;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -162,6 +180,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9B548BE1E1B426300569631 /* tripleLines.png in Resources */,
 				75A618DB1E0DE74400A0362E /* LaunchScreen.storyboard in Resources */,
 				752ADBA11E15E5FE008BA7E4 /* GoogleService-Info.plist in Resources */,
 				75A618D81E0DE74400A0362E /* Assets.xcassets in Resources */,
@@ -227,7 +246,9 @@
 				B96781CC1E19AA2800609F23 /* BetFeedCellTableViewCell.swift in Sources */,
 				752ADB9F1E0E3556008BA7E4 /* LoginViewController.swift in Sources */,
 				75A618D31E0DE74400A0362E /* ViewController.swift in Sources */,
+				B9B548C21E1B439B00569631 /* SideMenuViewController.swift in Sources */,
 				B98F51661E184D5300BD11DF /* BetFeedTableViewController.swift in Sources */,
+				B9B548BB1E1B414B00569631 /* ContainerViewController.swift in Sources */,
 				75A618D11E0DE74400A0362E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,6 +371,7 @@
 			baseConfigurationReference = 1349983332A583D309A07FF0 /* Pods-Social Betting.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = CKF73J7D4M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -367,6 +389,7 @@
 			baseConfigurationReference = 9B4410C77F552894DB3A0A78 /* Pods-Social Betting.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = CKF73J7D4M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

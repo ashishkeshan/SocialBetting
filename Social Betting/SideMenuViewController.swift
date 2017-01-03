@@ -1,38 +1,24 @@
 //
-//  BetFeedTableViewController.swift
-//  Social Betting
+//  SideMenu.swift
+//  
 //
-//  Created by William Z Wang on 12/31/16.
-//  Copyright © 2016 Ashish Keshan. All rights reserved.
+//  Created by William Z Wang on 1/2/17.
+//
 //
 
 import UIKit
-import Firebase
 
-@objc
-protocol BetFeedTableViewControllerDelegate {
-    @objc optional func toggleLeftPanel()
-    @objc optional func toggleRightPanel()
-    @objc optional func collapseSidePanels()
-}
-
-class BetFeedTableViewController: UIViewController, UITableViewDataSource {
-    
-    var delegate: BetFeedTableViewControllerDelegate?
-    
-    @IBAction func tripleLineAction(_ sender: Any) {
-        delegate?.toggleLeftPanel!()
-        print("menu")
-    }
+class SideMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,31 +27,28 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
     }
 
     // MARK: - Table view data source
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-//
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return 3
     }
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BetFeedCellTableViewCell", for: indexPath) as! BetFeedCellTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-        // Configure the cell...
-        
-        cell.configureCell()
-        
-//        cell.Name2.text = "William W."
-//        cell.bet.text = "10 Pushups or 2 Shots"
-//        cell.numLikes.text = "Heart 100 People"
-//        cell.witnesses.text = "Witnesses"
+         cell.textLabel?.text = "hello"
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
 
 
