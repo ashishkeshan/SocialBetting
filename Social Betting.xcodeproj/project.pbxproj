@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		752ADB9F1E0E3556008BA7E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752ADB9E1E0E3556008BA7E4 /* LoginViewController.swift */; };
 		752ADBA11E15E5FE008BA7E4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 752ADBA01E15E5FE008BA7E4 /* GoogleService-Info.plist */; };
+		753170111E1F3CBF00ECEF19 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753170101E1F3CBF00ECEF19 /* ProfileViewController.swift */; };
 		75A618D11E0DE74400A0362E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A618D01E0DE74400A0362E /* AppDelegate.swift */; };
 		75A618D31E0DE74400A0362E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A618D21E0DE74400A0362E /* ViewController.swift */; };
 		75A618D61E0DE74400A0362E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75A618D41E0DE74400A0362E /* Main.storyboard */; };
 		75A618D81E0DE74400A0362E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75A618D71E0DE74400A0362E /* Assets.xcassets */; };
 		75A618DB1E0DE74400A0362E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75A618D91E0DE74400A0362E /* LaunchScreen.storyboard */; };
+		75ABF10F1E1F352A00B1AC93 /* silhouette.png in Resources */ = {isa = PBXBuildFile; fileRef = 75ABF10E1E1F352A00B1AC93 /* silhouette.png */; };
 		9F5B70C84F9746A112474236 /* Pods_Social_Betting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61065E678781EF03087BC11C /* Pods_Social_Betting.framework */; };
 		B96781CC1E19AA2800609F23 /* BetFeedCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96781CB1E19AA2800609F23 /* BetFeedCellTableViewCell.swift */; };
 		B98F51661E184D5300BD11DF /* BetFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98F51651E184D5300BD11DF /* BetFeedTableViewController.swift */; };
@@ -27,6 +29,7 @@
 		61065E678781EF03087BC11C /* Pods_Social_Betting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Social_Betting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		752ADB9E1E0E3556008BA7E4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		752ADBA01E15E5FE008BA7E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		753170101E1F3CBF00ECEF19 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		75A618CD1E0DE74400A0362E /* Social Betting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Social Betting.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		75A618D01E0DE74400A0362E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75A618D21E0DE74400A0362E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -34,6 +37,7 @@
 		75A618D71E0DE74400A0362E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75A618DA1E0DE74400A0362E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		75A618DC1E0DE74500A0362E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		75ABF10E1E1F352A00B1AC93 /* silhouette.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = silhouette.png; sourceTree = "<group>"; };
 		9B4410C77F552894DB3A0A78 /* Pods-Social Betting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social Betting.release.xcconfig"; path = "Pods/Target Support Files/Pods-Social Betting/Pods-Social Betting.release.xcconfig"; sourceTree = "<group>"; };
 		B96781CB1E19AA2800609F23 /* BetFeedCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetFeedCellTableViewCell.swift; sourceTree = "<group>"; };
 		B98F51651E184D5300BD11DF /* BetFeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetFeedTableViewController.swift; sourceTree = "<group>"; };
@@ -92,11 +96,13 @@
 				75A618D21E0DE74400A0362E /* ViewController.swift */,
 				752ADB9E1E0E3556008BA7E4 /* LoginViewController.swift */,
 				75A618D41E0DE74400A0362E /* Main.storyboard */,
+				753170101E1F3CBF00ECEF19 /* ProfileViewController.swift */,
 				B9FE05C71E1F21D10070AAE5 /* TestTableViewController.swift */,
 				B9B548C11E1B439B00569631 /* SideMenuViewController.swift */,
 				B98F51651E184D5300BD11DF /* BetFeedTableViewController.swift */,
 				B96781CB1E19AA2800609F23 /* BetFeedCellTableViewCell.swift */,
 				75A618D71E0DE74400A0362E /* Assets.xcassets */,
+				75ABF10E1E1F352A00B1AC93 /* silhouette.png */,
 				75A618D91E0DE74400A0362E /* LaunchScreen.storyboard */,
 				75A618DC1E0DE74500A0362E /* Info.plist */,
 				752ADBA01E15E5FE008BA7E4 /* GoogleService-Info.plist */,
@@ -193,6 +199,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75ABF10F1E1F352A00B1AC93 /* silhouette.png in Resources */,
 				75A618DB1E0DE74400A0362E /* LaunchScreen.storyboard in Resources */,
 				752ADBA11E15E5FE008BA7E4 /* GoogleService-Info.plist in Resources */,
 				75A618D81E0DE74400A0362E /* Assets.xcassets in Resources */,
@@ -261,6 +268,7 @@
 				75A618D31E0DE74400A0362E /* ViewController.swift in Sources */,
 				B9B548C21E1B439B00569631 /* SideMenuViewController.swift in Sources */,
 				B98F51661E184D5300BD11DF /* BetFeedTableViewController.swift in Sources */,
+				753170111E1F3CBF00ECEF19 /* ProfileViewController.swift in Sources */,
 				75A618D11E0DE74400A0362E /* AppDelegate.swift in Sources */,
 				B9FE05C81E1F21D10070AAE5 /* TestTableViewController.swift in Sources */,
 			);

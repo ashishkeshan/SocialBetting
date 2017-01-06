@@ -1,31 +1,32 @@
 //
-//  TestTableViewController.swift
+//  ProfileViewController.swift
 //  Social Betting
 //
-//  Created by William Z Wang on 1/5/17.
+//  Created by Ashish Keshan on 1/5/17.
 //  Copyright © 2017 Ashish Keshan. All rights reserved.
 //
 
 import UIKit
 
-class TestTableViewController: UIViewController {
+class ProfileViewController: UIViewController {
+    @IBOutlet weak var profileImage: UIImageView!
 
-    @IBOutlet weak var menuButton: UIBarButtonItem!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.revealViewController() != nil {
-            menuButton?.target = self.revealViewController()
-            menuButton?.action = "revealToggle:"
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
+        profileImage.layer.borderWidth = 0.1
+        profileImage.layer.masksToBounds = false
+        profileImage.layer.borderColor = UIColor.black.cgColor
+        profileImage.layer.cornerRadius = profileImage.frame.height/2
+        profileImage.clipsToBounds = true
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 
     /*
     // MARK: - Navigation

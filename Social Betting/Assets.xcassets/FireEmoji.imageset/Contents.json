@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Notifications.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "FireEmoji.png",
       "scale" : "2x"
     },
     {
