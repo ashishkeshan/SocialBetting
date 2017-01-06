@@ -1,16 +1,15 @@
 //
-//  BetFeedTableViewController.swift
+//  TestTableViewController.swift
 //  Social Betting
 //
-//  Created by William Z Wang on 12/31/16.
-//  Copyright © 2016 Ashish Keshan. All rights reserved.
+//  Created by William Z Wang on 1/5/17.
+//  Copyright © 2017 Ashish Keshan. All rights reserved.
 //
 
 import UIKit
-import Firebase
 
-class BetFeedTableViewController: UIViewController, UITableViewDataSource {
-    
+class TestTableViewController: UITableViewController {
+
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -21,7 +20,7 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
             menuButton?.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
-        
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -43,33 +42,26 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
     }
 
     // MARK: - Table view data source
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-//
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 1
+        return 0
     }
 
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BetFeedCellTableViewCell", for: indexPath) as! BetFeedCellTableViewCell
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return 0
+    }
+
+    /*
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         // Configure the cell...
-        
-        cell.configureCell()
-        
-//        cell.Name2.text = "William W."
-//        cell.bet.text = "10 Pushups or 2 Shots"
-//        cell.numLikes.text = "Heart 100 People"
-//        cell.witnesses.text = "Witnesses"
 
         return cell
     }
-
+    */
 
     /*
     // Override to support conditional editing of the table view.
