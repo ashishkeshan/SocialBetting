@@ -255,7 +255,11 @@
                         <barButtonItem key="leftBarButtonItem" title="menuBar" style="plain" id="3MR-HN-jQB"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="betSenseLabel" destination="url-o7-ru6" id="Sgt-Kq-Szk"/>
+                        <outlet property="fullNameLabel" destination="ck9-a8-LQ3" id="YVe-Yg-Uzv"/>
                         <outlet property="profileImage" destination="oCS-ZJ-pd8" id="MYt-xa-buA"/>
+                        <outlet property="totalBetsLabel" destination="ObL-Ea-5Uu" id="DUq-F7-lGd"/>
+                        <outlet property="usernameLabel" destination="6Ua-r0-8QT" id="w8I-yG-Yox"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Gd-yP-8jl" userLabel="First Responder" sceneMemberID="firstResponder"/>
