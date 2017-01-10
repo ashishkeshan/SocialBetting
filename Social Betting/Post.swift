@@ -15,7 +15,7 @@ struct Post {
     let postID: Int
     let bet: String
     let likes: String
-    let comments: Array<Float> = Array()
+    var comments: Array<String> = Array()
     let witnesses: Int                      // Show who witnesses are, COME BACK TO THIS LATER
     let better: String
     let betted: String
@@ -30,7 +30,7 @@ struct Post {
         self.postID = postid
         self.bet = bet
         self.likes = likes
-        self.comments = comments as! Array<Float>
+        self.comments = comments
         self.witnesses = witnesses                      // Show who witnesses are, COME BACK TO THIS LATER
         self.better = better
         self.betted = betted
