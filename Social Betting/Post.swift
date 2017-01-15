@@ -14,7 +14,7 @@ struct Post {
     let key: String
     let postID: Int
     let bet: String
-    let likes: String
+    let likes: Int
     var comments: Array<String> = Array()
     let witnesses: Int                      // Show who witnesses are, COME BACK TO THIS LATER
     let better: String
@@ -24,7 +24,7 @@ struct Post {
     let timePosted: Int
     let ref: FIRDatabaseReference?
     
-    init(postid: Int, bet: String, likes: String, comments: Array<String>, witnesses: Int, better: String,
+    init(postid: Int, bet: String, likes: Int, comments: Array<String>, witnesses: Int, better: String,
          betted: String, upvotes: Int, downvotes: Int, timePosted: Int, key: String = "") {
         self.key = key
         self.postID = postid

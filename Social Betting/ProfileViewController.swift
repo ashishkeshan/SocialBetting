@@ -11,6 +11,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     @IBOutlet weak var profileImage: UIImageView!
 
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var betSenseLabel: UILabel!
@@ -23,6 +24,12 @@ class ProfileViewController: UIViewController {
         profileImage.layer.borderColor = UIColor.black.cgColor
         profileImage.layer.cornerRadius = profileImage.frame.height/2
         profileImage.clipsToBounds = true
+        
+        if self.revealViewController() != nil {
+            menuButton?.target = self.revealViewController()
+            menuButton?.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
         // Do any additional setup after loading the view.
     }
 

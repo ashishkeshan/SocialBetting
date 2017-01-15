@@ -8,8 +8,15 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
+
 
 class BetFeedTableViewController: UIViewController, UITableViewDataSource {
+    
+    let ref = FIRDatabase.database().reference(withPath: "posts")
+    var count: Int = 0
+    var textFieldOne: UITextField!
+    var textFieldTwo: UITextField!
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
@@ -18,7 +25,7 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
         
         if self.revealViewController() != nil {
             menuButton?.target = self.revealViewController()
-            menuButton?.action = "revealToggle:"
+            menuButton?.action = #selector(SWRevealViewController.revealToggle(_:))
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
@@ -29,13 +36,77 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        if self.revealViewController() != nil {
-//            menuButton?.target = self.revealViewController()
-//            menuButton?.action = "revealToggle:"
-//            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-//        }
-//    }
+    @IBAction func addButtonDidTouch(_ sender: Any) {
+        count += 1
+        let stringCount = String(self.count)
+        
+        let alert = UIAlertController(title: "Make A Bet",
+                                      message: "Fill in the fields",
+                                      preferredStyle: .alert)
+        
+        alert.addTextField(configurationHandler: addTextField1)
+        alert.addTextField(configurationHandler: addTextField2)
+        
+        let saveAction = UIAlertAction(title: "Save",
+                                       style: .default) { _ in
+                                        // 1
+//                                        guard let textFieldOne = alert.textFields?.first,
+                                            let text = self.textFieldOne.text
+                                        
+//                                        guard let textFieldTwo = alert.textFields?.,
+                                            let textTwo = self.textFieldTwo.text
+
+                                        let postComments = ["hella dank", "shit breh dis gg", "u rekt dawg"]
+                                        
+                                        let post = Post(postid: self.count,
+                                                               bet: text!,
+                                                               likes: 0,
+                                                               comments: postComments,
+                                                               witnesses: 0,                     // Show who witnesses are, COME BACK TO THIS LATER
+                                                                better: "William",
+                                                                betted: textTwo!,
+                                                                upvotes: 0,
+                                                                downvotes: 0,
+                                                                timePosted: 1230,
+                                                                key: "this is a key")
+                                        
+                                        // 3
+                                        let postRef = self.ref.child(stringCount)
+                                        
+                                        // 4
+                                        postRef.setValue(post.toAnyObject())
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .default)
+        
+//        alert.addTextField(
+//            configurationHandler: {(textField: UITextField!) in
+//                textField.placeholder = "sdf sadf"
+//        })
+//        alert.addTextField(
+//            configurationHandler: {(textField: UITextField!) in
+//                textField.placeholder = "wowowowow"
+//        })
+        
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func addTextField1(textField: UITextField!)
+    {
+        textField.placeholder = "Enter bet"
+        textFieldOne = textField
+    }
+    
+    func addTextField2(textField: UITextField!)
+    {
+        textField.placeholder = "Who are you betting with?"
+        textFieldTwo = textField
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
