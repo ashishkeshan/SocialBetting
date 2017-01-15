@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		750DF7221E24738000D408C8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750DF7211E24738000D408C8 /* User.swift */; };
 		752ADB9F1E0E3556008BA7E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752ADB9E1E0E3556008BA7E4 /* LoginViewController.swift */; };
 		752ADBA11E15E5FE008BA7E4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 752ADBA01E15E5FE008BA7E4 /* GoogleService-Info.plist */; };
 		753170111E1F3CBF00ECEF19 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753170101E1F3CBF00ECEF19 /* ProfileViewController.swift */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		1349983332A583D309A07FF0 /* Pods-Social Betting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social Betting.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Social Betting/Pods-Social Betting.debug.xcconfig"; sourceTree = "<group>"; };
 		61065E678781EF03087BC11C /* Pods_Social_Betting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Social_Betting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		750DF7211E24738000D408C8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		752ADB9E1E0E3556008BA7E4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		752ADBA01E15E5FE008BA7E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		753170101E1F3CBF00ECEF19 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				B9B548BC1E1B425500569631 /* Images */,
 				75A618D01E0DE74400A0362E /* AppDelegate.swift */,
 				B958D7F71E246DF5008F1299 /* Post.swift */,
+				750DF7211E24738000D408C8 /* User.swift */,
 				75A618D21E0DE74400A0362E /* ViewController.swift */,
 				752ADB9E1E0E3556008BA7E4 /* LoginViewController.swift */,
 				75A618D41E0DE74400A0362E /* Main.storyboard */,
@@ -275,6 +278,7 @@
 				75A618D11E0DE74400A0362E /* AppDelegate.swift in Sources */,
 				B9FE05C81E1F21D10070AAE5 /* TestTableViewController.swift in Sources */,
 				B958D7F81E246DF5008F1299 /* Post.swift in Sources */,
+				750DF7221E24738000D408C8 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

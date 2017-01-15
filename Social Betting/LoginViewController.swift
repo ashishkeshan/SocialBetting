@@ -14,6 +14,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var textFieldLogin: UITextField!
+    var friendsList: [String] = []
+    var userID: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,13 +49,26 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             let emailField = alert.textFields![0]
             let passwordField = alert.textFields![1]
             FIRAuth.auth()!.createUser(withEmail: emailField.text!, password: passwordField.text!) { user, error in
-                if error == nil {
-                    FIRAuth.auth()!.signIn(withEmail: self.textFieldLogin.text!, password: self.textFieldPassword.text!)
-                    self.performSegue(withIdentifier: "showFeed", sender: self)
-                }
-                else{
+                if error != nil {
                     print(error!)
+                    return
                 }
+                guard let uid = user?.uid else{
+                    return
+                }
+                let ref = FIRDatabase.database().reference(fromURL: "https://social-betting.firebaseio.com/")
+                let usersReference = ref.child("users").child(uid)
+                let values = ["email": emailField.text]
+                usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+                    if err != nil{
+                        print(err as Any)
+                        return
+                    }
+                    print("saved friend successfully!")
+                })
+                    
+                FIRAuth.auth()!.signIn(withEmail: self.textFieldLogin.text!, password: self.textFieldPassword.text!)
+                self.performSegue(withIdentifier: "showFeed", sender: self)
             }
         }
         
@@ -92,6 +107,29 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         if (result?.isCancelled)!{
             return
         }
+        self.userID = "2"
+        let fbRequest = FBSDKGraphRequest(graphPath:"/me/friends", parameters: nil);
+        fbRequest?.start { (connection : FBSDKGraphRequestConnection?, result : Any?, error : Error?) -> Void in
+            
+            var resultDictionary:NSDictionary!
+            
+            if error == nil {
+                
+                print("Friends are : \(result)")
+                resultDictionary = result as! [String:AnyObject] as NSDictionary!
+                let test = resultDictionary.object(forKey: "data") as! [[String:AnyObject]]
+                for i in test {
+                    let dict = i as NSDictionary
+                    let name = dict["name"] as! String
+                    self.friendsList.append(name)
+                }
+            }
+            let currUser = User(friendsList: self.friendsList, userID: self.userID)
+            let ref = FIRDatabase.database().reference(withPath: "users")
+            let userRef = ref.child("Ashish Keshan")
+            userRef.setValue(currUser.toAnyObject())
+            
+            
         let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
         FIRAuth.auth()?.signIn(with: credential) { (user, error) in
             // ...
@@ -102,6 +140,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
         self.performSegue(withIdentifier: "showFeed", sender: nil)
         print("Successfully logged in with facebook...")
+    }
     }
     
     override func didReceiveMemoryWarning() {
