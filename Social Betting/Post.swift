@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import FirebaseDatabase
 
 struct Post {
     
@@ -40,14 +41,20 @@ struct Post {
         self.ref = nil
     }
     
-//    init(snapshot: FIRDataSnapshot) {
-//        key = snapshot.key
-//        let snapshotValue = snapshot.value as! [String: AnyObject]
-//        postID = snapshotValue["postID"] as! Int
-//        addedByUser = snapshotValue["addedByUser"] as! String
-//        completed = snapshotValue["completed"] as! Bool
-//        ref = snapshot.ref
-//    }
+    init(snapshot: FIRDataSnapshot) {
+        key = snapshot.key
+        let snapshotValue = snapshot.value as! [String: AnyObject]
+        postID = snapshotValue["postID"] as! Int
+        bet = snapshotValue["bet"] as! String
+        betted = snapshotValue["betted"] as! String
+        better = snapshotValue["better"] as! String
+        upVotes = snapshotValue["upVotes"] as! Int
+        downVotes = snapshotValue["downVotes"] as! Int
+        timePosted = snapshotValue["timePosted"] as! Int
+        likes = snapshotValue["likes"] as! Int
+        witnesses = snapshotValue["witnesses"] as! Int
+        ref = nil
+    }
     
     func toAnyObject() -> Any {
         return [

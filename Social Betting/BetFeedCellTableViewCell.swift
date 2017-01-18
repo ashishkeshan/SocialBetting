@@ -19,6 +19,7 @@ class BetFeedCellTableViewCell: UITableViewCell {
     @IBOutlet var vote: UIButton!
     @IBOutlet var trophy: UIImageView!
     @IBOutlet var sadFace: UIImageView!
+    @IBOutlet weak var betLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,11 +32,14 @@ class BetFeedCellTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCell() {
-        self.name1.text = "Ashish K."
-        self.name2.text = "William W."
-        self.hearts.text = "Hearts 100+"
-        self.witnesses.text = "Witnesses"
+    func configureCell(currPost: Post) {
+        
+        self.name1.text = currPost.better
+        self.name2.text = currPost.betted
+        self.betLabel.text = currPost.bet
+        self.hearts.text = String(currPost.likes)
+        self.witnesses.text = String(currPost.witnesses)
+        
     }
 
 }

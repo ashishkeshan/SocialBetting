@@ -13,10 +13,21 @@ import FirebaseDatabase
 
 class BetFeedTableViewController: UIViewController, UITableViewDataSource {
     
+    @IBOutlet var tableView: UITableView!
+    
     let ref = FIRDatabase.database().reference(withPath: "posts")
     var count: Int = 0
     var textFieldOne: UITextField!
     var textFieldTwo: UITextField!
+    var bet: String = ""
+    var likes: Int = 0
+    var witnesses: Int = 0                    // Show who witnesses are, COME BACK TO THIS LATER
+    var better: String = ""
+    var betted: String = ""
+    var upvotes: Int = 0
+    var downvotes: Int = 0
+    var timePosted: Int = 0
+    var posts: [Post] = []
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
@@ -34,6 +45,23 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated);
+        
+        ref.observe(.value) { (snap: FIRDataSnapshot) in
+            self.posts.removeAll()
+            print(snap.childrenCount) // I got the expected number of items
+            let enumerator = snap.children
+            while let rest = enumerator.nextObject() as? FIRDataSnapshot {
+                let currPost = Post(snapshot: rest )
+                self.posts.append(currPost)
+                print(currPost.betted)
+                self.tableView.reloadData()
+            }
+        }
+        
     }
     
     @IBAction func addButtonDidTouch(_ sender: Any) {
@@ -80,20 +108,12 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
         let cancelAction = UIAlertAction(title: "Cancel",
                                          style: .default)
         
-//        alert.addTextField(
-//            configurationHandler: {(textField: UITextField!) in
-//                textField.placeholder = "sdf sadf"
-//        })
-//        alert.addTextField(
-//            configurationHandler: {(textField: UITextField!) in
-//                textField.placeholder = "wowowowow"
-//        })
-        
         alert.addAction(saveAction)
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
     }
+    
     
     func addTextField1(textField: UITextField!)
     {
@@ -107,7 +127,6 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
         textFieldTwo = textField
     }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -122,16 +141,18 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
 //
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return posts.count
     }
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BetFeedCellTableViewCell", for: indexPath) as! BetFeedCellTableViewCell
 
+        let configurePost = posts[indexPath.row]
+        
         // Configure the cell...
         
-        cell.configureCell()
+        cell.configureCell(currPost: configurePost);
         
 //        cell.Name2.text = "William W."
 //        cell.bet.text = "10 Pushups or 2 Shots"
