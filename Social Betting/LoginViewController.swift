@@ -16,9 +16,18 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet weak var textFieldLogin: UITextField!
     var friendsList: [String] = []
     var userID: String = ""
+    var email:String = ""
+    var name:String = ""
+    var id:String = ""
+    var imageView : UIImageView?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        imageView?.center = CGPoint(x: view.center.x, y: 150)
+        imageView?.image = UIImage(named: "silhouette.png")
+        view.addSubview(imageView!)
         
         let loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_friends"]
@@ -100,6 +109,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult?, error: Error!) {
+        
         if error != nil {
             print(error)
             return
@@ -108,7 +118,25 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             return
         }
         self.userID = "2"
-        let fbRequest = FBSDKGraphRequest(graphPath:"/me/friends", parameters: nil);
+        let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name"])
+        request?.start { (connection : FBSDKGraphRequestConnection?, result : Any?, error : Error?) -> Void in
+            
+            var infoDictionary:NSDictionary!
+            
+            if error == nil {
+                infoDictionary = result as! [String:AnyObject] as NSDictionary!
+                self.email = infoDictionary["email"] as! String
+                self.id = infoDictionary["id"] as! String
+                self.name = infoDictionary["name"] as! String
+                let url = NSURL(string: "https://graph.facebook.com/\(self.id)/picture?type=large&return_ssl_resources=1")!
+               if let data = NSData(contentsOf: url as URL) {
+                    self.imageView?.image = UIImage(data: data as Data)
+                }
+                print(self.email + " " + self.id + " " + self.name)
+            }
+        }
+        
+        let fbRequest = FBSDKGraphRequest(graphPath:"/me/friends", parameters: nil)
         fbRequest?.start { (connection : FBSDKGraphRequestConnection?, result : Any?, error : Error?) -> Void in
             
             var resultDictionary:NSDictionary!
@@ -124,9 +152,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                     self.friendsList.append(name)
                 }
             }
-            let currUser = User(friendsList: self.friendsList, userID: self.userID)
+            let currUser = User(friendsList: self.friendsList, fullName: self.name)
             let ref = FIRDatabase.database().reference(withPath: "users")
-            let userRef = ref.child("Ashish Keshan")
+            let userRef = ref.child(self.id)
             userRef.setValue(currUser.toAnyObject())
             
             

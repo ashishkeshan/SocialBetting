@@ -15,12 +15,16 @@ struct User {
     //let bet: String
     //let likes: String
     let friendsList: [String]
-    let userID: String
+    let fullName: String
+   // let profilePic: UIImageView
+    //let userID: String
     
     
-    init(friendsList: [String], userID: String) {
+    init(friendsList: [String], fullName: String) {
         self.friendsList = friendsList
-        self.userID = userID
+        self.fullName = fullName
+        //self.profilePic = profilePic
+        //self.userID = userID
     }
     
     //    init(snapshot: FIRDataSnapshot) {
@@ -35,7 +39,8 @@ struct User {
     func toAnyObject() -> Any {
         return [
             "friendsList:": friendsList,
-            "userID:": userID
+            "fullName": fullName,
+            //"profilePic:": profilePic
         ]
     }
 }
