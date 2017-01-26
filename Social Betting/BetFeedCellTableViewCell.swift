@@ -82,6 +82,21 @@ class BetFeedCellTableViewCell: UITableViewCell {
             }
         }
         
+        let defaults = UserDefaults.standard
+        
+        let saveKey = "post" + String(id)
+        
+        // ---------------------------------- COME BACK TO THIS --------------------------- //
+//        var userSelectedColor : NSData? = (UserDefaults.standard.object(forKey: saveKey) as? NSData)
+//
+//        if (userSelectedColor != nil) {
+            var colorToSetAsDefault : UIColor = self.likeButton.titleColor(for: UIControlState.normal)!
+            var data : NSData = NSKeyedArchiver.archivedData(withRootObject: colorToSetAsDefault) as NSData
+            UserDefaults.standard.set(data, forKey: saveKey)
+            UserDefaults.standard.synchronize()
+            print("SET DEFAULT USER COLOR TO RED")
+//        }
+        
         print("LIKE VALUE IS:")
         print(likeValue)
     }

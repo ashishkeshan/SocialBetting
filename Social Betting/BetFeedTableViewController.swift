@@ -30,6 +30,8 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
     var timePosted: Int = 0
     var posts: [Post] = []
     
+    var isFirstOpening: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -160,6 +162,20 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
         
         cell.configureCell(currPost: configurePost);
         cell.id = configurePost.postID
+        
+        if(isFirstOpening) {
+            let postToGet = "post" + String(configurePost.postID)
+            
+            if let userSelectedColorData  = UserDefaults.standard.object(forKey: postToGet) as? NSData {
+                print("HERE")
+                if let userSelectedColor = NSKeyedUnarchiver.unarchiveObject(with: userSelectedColorData as Data) as? UIColor {
+                    
+                    cell.likeButton.setTitleColor(userSelectedColor, for: UIControlState.normal)
+                }
+            }
+        }
+        
+        isFirstOpening = false
         
 //        cell.Name2.text = "William W."
 //        cell.bet.text = "10 Pushups or 2 Shots"
