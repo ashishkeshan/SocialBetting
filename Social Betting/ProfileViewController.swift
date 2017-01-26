@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var betSenseLabel: UILabel!
     @IBOutlet weak var totalBetsLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

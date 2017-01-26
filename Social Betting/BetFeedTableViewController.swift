@@ -14,6 +14,7 @@ import FirebaseDatabase
 class BetFeedTableViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var sideMenuButton: UIBarButtonItem!
     
     let ref = FIRDatabase.database().reference(withPath: "posts")
     var count: Int = 0
@@ -29,14 +30,12 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
     var timePosted: Int = 0
     var posts: [Post] = []
     
-    @IBOutlet weak var menuButton: UIBarButtonItem!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if self.revealViewController() != nil {
-            menuButton?.target = self.revealViewController()
-            menuButton?.action = #selector(SWRevealViewController.revealToggle(_:))
+            sideMenuButton?.target = self.revealViewController()
+            sideMenuButton?.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
@@ -65,7 +64,14 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func addButtonDidTouch(_ sender: Any) {
-        count += 1
+        
+        ref.observe(.value) { (snap: FIRDataSnapshot) in
+            self.count = Int(snap.childrenCount) // I got the expected number of items
+        }
+        
+        print("COUNT IS:")
+        print(count)
+        
         let stringCount = String(self.count)
         
         let alert = UIAlertController(title: "Make A Bet",

@@ -283,13 +283,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNu-hS-0vI">
-                                            <rect key="frame" x="28" y="116.5" width="30" height="18"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="30" id="ozS-mV-U7D"/>
-                                            </constraints>
-                                            <state key="normal" title="Like"/>
-                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="837-Is-lLI">
                                             <rect key="frame" x="112" y="105" width="67" height="30"/>
                                             <constraints>
@@ -364,21 +357,28 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNu-hS-0vI">
+                                            <rect key="frame" x="27" y="111" width="30" height="18"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="ozS-mV-U7D"/>
+                                            </constraints>
+                                            <state key="normal" title="Like"/>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="VD4-dL-dJL" firstAttribute="trailing" secondItem="hqQ-o4-Isp" secondAttribute="trailing" id="0L1-Y6-4vj"/>
                                         <constraint firstItem="mAG-QS-j4U" firstAttribute="leading" secondItem="fEh-mj-9Oy" secondAttribute="leadingMargin" constant="9" id="0tf-9b-jVu"/>
                                         <constraint firstItem="jmb-ed-7wB" firstAttribute="top" secondItem="jEh-UD-Lf6" secondAttribute="bottom" constant="76" id="26j-n9-hHg"/>
-                                        <constraint firstAttribute="bottom" secondItem="dNu-hS-0vI" secondAttribute="bottom" constant="1" id="2Im-io-2mP"/>
+                                        <constraint firstAttribute="bottom" secondItem="dNu-hS-0vI" secondAttribute="bottom" constant="6" id="2Im-io-2mP"/>
                                         <constraint firstItem="gem-Eh-6we" firstAttribute="top" secondItem="Vg6-Lx-W5B" secondAttribute="bottom" constant="39.5" id="3h0-FA-nki"/>
                                         <constraint firstAttribute="bottom" secondItem="837-Is-lLI" secondAttribute="bottom" id="4Xi-vo-Kvu"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="hqQ-o4-Isp" secondAttribute="bottom" constant="38" id="62N-cV-Xcp"/>
                                         <constraint firstAttribute="bottom" secondItem="jmb-ed-7wB" secondAttribute="bottom" constant="1" id="FkR-6W-BPT"/>
-                                        <constraint firstItem="dNu-hS-0vI" firstAttribute="top" secondItem="mAG-QS-j4U" secondAttribute="bottom" constant="27" id="J8B-Mj-Qt8"/>
+                                        <constraint firstItem="dNu-hS-0vI" firstAttribute="top" secondItem="mAG-QS-j4U" secondAttribute="bottom" constant="22" id="J8B-Mj-Qt8"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="VD4-dL-dJL" secondAttribute="trailing" constant="56" id="M7A-gl-n83"/>
                                         <constraint firstItem="gem-Eh-6we" firstAttribute="centerX" secondItem="Vg6-Lx-W5B" secondAttribute="centerX" constant="20" id="MS5-kv-n86"/>
                                         <constraint firstItem="Vg6-Lx-W5B" firstAttribute="top" secondItem="fEh-mj-9Oy" secondAttribute="topMargin" id="N8X-fc-Dd6"/>
-                                        <constraint firstItem="dNu-hS-0vI" firstAttribute="leading" secondItem="fEh-mj-9Oy" secondAttribute="leading" constant="28" id="NSk-Xx-Yzb"/>
+                                        <constraint firstItem="dNu-hS-0vI" firstAttribute="leading" secondItem="fEh-mj-9Oy" secondAttribute="leading" constant="27" id="NSk-Xx-Yzb"/>
                                         <constraint firstItem="mAG-QS-j4U" firstAttribute="baseline" secondItem="gem-Eh-6we" secondAttribute="baseline" id="Rch-6P-9yl"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="gem-Eh-6we" secondAttribute="trailing" constant="169" id="Rmh-jP-lrV"/>
                                         <constraint firstItem="VD4-dL-dJL" firstAttribute="top" secondItem="fEh-mj-9Oy" secondAttribute="topMargin" constant="20" id="WJ5-hh-Gjk"/>
@@ -393,14 +393,14 @@
                                         <constraint firstItem="Vg6-Lx-W5B" firstAttribute="leading" secondItem="q3b-9F-kF7" secondAttribute="trailing" constant="13" id="eUD-Xc-urK"/>
                                         <constraint firstItem="jEh-UD-Lf6" firstAttribute="leading" secondItem="Vg6-Lx-W5B" secondAttribute="trailing" constant="16" id="hKM-Oh-bbr"/>
                                         <constraint firstAttribute="trailing" secondItem="jmb-ed-7wB" secondAttribute="trailing" constant="104" id="hpm-CS-rPw"/>
-                                        <constraint firstItem="837-Is-lLI" firstAttribute="leading" secondItem="dNu-hS-0vI" secondAttribute="trailing" constant="54" id="jjc-oa-wTq"/>
+                                        <constraint firstItem="837-Is-lLI" firstAttribute="leading" secondItem="dNu-hS-0vI" secondAttribute="trailing" constant="55" id="jjc-oa-wTq"/>
                                         <constraint firstItem="gem-Eh-6we" firstAttribute="leading" secondItem="mAG-QS-j4U" secondAttribute="trailing" constant="42" id="kYt-71-8Lv"/>
                                         <constraint firstItem="VD4-dL-dJL" firstAttribute="leading" secondItem="jEh-UD-Lf6" secondAttribute="trailing" constant="8" symbolic="YES" id="lmy-FF-GPU"/>
                                         <constraint firstItem="jmb-ed-7wB" firstAttribute="leading" secondItem="837-Is-lLI" secondAttribute="trailing" constant="51" id="mbM-Io-DdS"/>
                                         <constraint firstItem="Vg6-Lx-W5B" firstAttribute="leading" secondItem="q3b-9F-kF7" secondAttribute="trailing" constant="13" id="rnF-Rg-Mw6"/>
                                         <constraint firstItem="VD4-dL-dJL" firstAttribute="leading" secondItem="hqQ-o4-Isp" secondAttribute="leading" id="soM-0T-JJ5"/>
                                         <constraint firstAttribute="bottom" secondItem="837-Is-lLI" secondAttribute="bottom" constant="1" id="ukq-GS-hZy"/>
-                                        <constraint firstItem="837-Is-lLI" firstAttribute="leading" secondItem="dNu-hS-0vI" secondAttribute="trailing" constant="54" id="vRm-Pp-ymR"/>
+                                        <constraint firstItem="837-Is-lLI" firstAttribute="leading" secondItem="dNu-hS-0vI" secondAttribute="trailing" constant="55" id="vRm-Pp-ymR"/>
                                         <constraint firstItem="jEh-UD-Lf6" firstAttribute="leading" secondItem="Vg6-Lx-W5B" secondAttribute="trailing" constant="16" id="zRj-gG-y1c"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -425,7 +425,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Root View Controller" id="C5u-Nr-CtM" userLabel="Bet Feed">
-                        <barButtonItem key="leftBarButtonItem" title="Button" style="plain" id="b4b-pW-kTL">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="b4b-pW-kTL">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cE6-nB-UTH">
                                 <rect key="frame" x="16" y="-10" width="69" height="63"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -442,7 +442,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="menuButton" destination="b4b-pW-kTL" id="IkC-Xa-1IA"/>
+                        <outlet property="sideMenuButton" destination="b4b-pW-kTL" id="hTW-O3-rxV"/>
                         <outlet property="tableView" destination="CIM-a7-udv" id="Cqd-zg-RqH"/>
                     </connections>
                 </tableViewController>
