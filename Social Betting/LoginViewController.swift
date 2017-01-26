@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 import Firebase
 import FBSDKLoginKit
 
@@ -18,16 +19,19 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     var userID: String = ""
     var email:String = ""
     var name:String = ""
+    var fName:String = ""
+    var lName:String = ""
+    var username:String = ""
     var id:String = ""
     var imageView : UIImageView?
-    
+    var usernameMap: NSMapTable<AnyObject, AnyObject>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        imageView?.center = CGPoint(x: view.center.x, y: 150)
-        imageView?.image = UIImage(named: "silhouette.png")
-        view.addSubview(imageView!)
+        //imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        //imageView?.center = CGPoint(x: view.center.x, y: 150)
+        //imageView?.image = UIImage(named: "silhouette.png")
+        //view.addSubview(imageView!)
         
         let loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_friends"]
@@ -117,8 +121,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         if (result?.isCancelled)!{
             return
         }
-        self.userID = "2"
-        let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name"])
+        let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name, first_name, last_name"])
         request?.start { (connection : FBSDKGraphRequestConnection?, result : Any?, error : Error?) -> Void in
             
             var infoDictionary:NSDictionary!
@@ -128,6 +131,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 self.email = infoDictionary["email"] as! String
                 self.id = infoDictionary["id"] as! String
                 self.name = infoDictionary["name"] as! String
+                self.fName = infoDictionary["first_name"] as! String
+                self.lName = infoDictionary["last_name"] as! String
+                self.username = self.fName + "-" + self.lName
+                self.usernameMap?.setObject(self.username as AnyObject?, forKey: 1 as AnyObject?)
                 let url = NSURL(string: "https://graph.facebook.com/\(self.id)/picture?type=large&return_ssl_resources=1")!
                if let data = NSData(contentsOf: url as URL) {
                     self.imageView?.image = UIImage(data: data as Data)
@@ -152,25 +159,27 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                     self.friendsList.append(name)
                 }
             }
-            let currUser = User(friendsList: self.friendsList, fullName: self.name)
+            let currUser = User(friendsList: self.friendsList, fullName: self.name, fName: self.fName, lName: self.lName, username: self.username )
+            let userIndexRef = FIRDatabase.database().reference(withPath: "usernameOptions")
+            userIndexRef.setValue(["\(self.username)": 1])
             let ref = FIRDatabase.database().reference(withPath: "users")
             let userRef = ref.child(self.id)
             userRef.setValue(currUser.toAnyObject())
             
             
-        let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-        FIRAuth.auth()?.signIn(with: credential) { (user, error) in
-            // ...
-            if error != nil {
+            let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+            FIRAuth.auth()?.signIn(with: credential) { (user, error) in
                 // ...
-                return
+                if error != nil {
+                    // ...
+                    return
+                }
             }
-        }
         self.performSegue(withIdentifier: "showFeed", sender: nil)
         print("Successfully logged in with facebook...")
+        }
     }
-    }
-    
+        
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
