@@ -16,13 +16,19 @@ struct User {
     //let likes: String
     let friendsList: [String]
     let fullName: String
+    let fName: String
+    let lName: String
+    let username: String
    // let profilePic: UIImageView
     //let userID: String
     
     
-    init(friendsList: [String], fullName: String) {
+    init(friendsList: [String], fullName: String, fName: String, lName: String, username:String) {
         self.friendsList = friendsList
         self.fullName = fullName
+        self.fName = fName
+        self.lName = lName
+        self.username = username
         //self.profilePic = profilePic
         //self.userID = userID
     }
@@ -38,9 +44,11 @@ struct User {
     
     func toAnyObject() -> Any {
         return [
-            "friendsList:": friendsList,
+            "firstName": fName,
+            "lastName": lName,
             "fullName": fullName,
-            //"profilePic:": profilePic
+            "friendsList:": friendsList,
+            "username": username
         ]
     }
 }
