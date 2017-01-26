@@ -8,8 +8,12 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 class BetFeedCellTableViewCell: UITableViewCell {
+    
+    public var id: Int = 0
+    
     @IBOutlet var name1: UILabel!
     @IBOutlet var name2: UILabel!
     @IBOutlet var hearts: UILabel!
@@ -20,7 +24,13 @@ class BetFeedCellTableViewCell: UITableViewCell {
     @IBOutlet var trophy: UIImageView!
     @IBOutlet var sadFace: UIImageView!
     @IBOutlet weak var betLabel: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var voteButton: UIButton!
     
+    
+    let postFef = FIRDatabase.database().reference(withPath: "posts");
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -41,5 +51,46 @@ class BetFeedCellTableViewCell: UITableViewCell {
         self.witnesses.text = String(currPost.witnesses)
         
     }
+    
+    @IBAction func likeButtonDidTouch(_ sender: Any) {
+        
+        print("THE ID IS: ")
+        print(id)
+        
+        let stringID = String(id)
+        
+        let singlePostRef = self.postFef.child(stringID)
+        
+        var likeValue: Int = 0
+        
+        let testRef = singlePostRef.child("likes")
+        
+        testRef.observeSingleEvent(of: .value) { (snap: FIRDataSnapshot) in
+            if(snap.exists()) {
+                print("EXISTS")
+                print(snap.value)
+//                likeValue = snap.value as! Int
+                
+                if(self.likeButton.titleColor(for: UIControlState.normal) != UIColor.red) {
+                    singlePostRef.updateChildValues(["likes":(snap.value as! Int) + 1])
+                    self.likeButton.setTitleColor(UIColor.red, for: UIControlState.normal)
+                }
+                else {
+                    singlePostRef.updateChildValues(["likes":(snap.value as! Int) - 1])
+                    self.likeButton.setTitleColor(UIColor.blue, for: UIControlState.normal)
+                }
+            }
+        }
+        
+        print("LIKE VALUE IS:")
+        print(likeValue)
+    }
+    
+    @IBAction func commentButtonDidTouch(_ sender: Any) {
+    }
+    
+    @IBAction func voteButtonDidTouch(_ sender: Any) {
+    }
+    
 
 }

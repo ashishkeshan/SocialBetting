@@ -51,12 +51,12 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
         
         ref.observe(.value) { (snap: FIRDataSnapshot) in
             self.posts.removeAll()
-            print(snap.childrenCount) // I got the expected number of items
+//            print(snap.childrenCount) // I got the expected number of items
             let enumerator = snap.children
             while let rest = enumerator.nextObject() as? FIRDataSnapshot {
                 let currPost = Post(snapshot: rest )
                 self.posts.append(currPost)
-                print(currPost.betted)
+//                print(currPost.betted)
                 self.tableView.reloadData()
             }
         }
@@ -65,9 +65,7 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
     
     @IBAction func addButtonDidTouch(_ sender: Any) {
         
-        ref.observe(.value) { (snap: FIRDataSnapshot) in
-            self.count = Int(snap.childrenCount) // I got the expected number of items
-        }
+        self.count = posts.count
         
         print("COUNT IS:")
         print(count)
@@ -105,6 +103,8 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
                                                                 key: "this is a key")
                                         
                                         // 3
+                                        print("String count is:")
+                                        print(stringCount)
                                         let postRef = self.ref.child(stringCount)
                                         
                                         // 4
@@ -159,6 +159,7 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
         // Configure the cell...
         
         cell.configureCell(currPost: configurePost);
+        cell.id = configurePost.postID
         
 //        cell.Name2.text = "William W."
 //        cell.bet.text = "10 Pushups or 2 Shots"

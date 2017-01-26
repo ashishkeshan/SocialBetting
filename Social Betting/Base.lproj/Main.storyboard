@@ -290,6 +290,9 @@
                                                 <constraint firstAttribute="height" constant="30" id="wE6-yU-XNn"/>
                                             </constraints>
                                             <state key="normal" title="Comment"/>
+                                            <connections>
+                                                <action selector="commentButtonDidTouch:" destination="qyn-Nj-put" eventType="touchUpInside" id="F74-Sg-8SX"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jmb-ed-7wB">
                                             <rect key="frame" x="230" y="105" width="41" height="29.5"/>
@@ -297,6 +300,9 @@
                                                 <constraint firstAttribute="width" constant="41" id="oGE-7z-JD0"/>
                                             </constraints>
                                             <state key="normal" title="Vote"/>
+                                            <connections>
+                                                <action selector="voteButtonDidTouch:" destination="qyn-Nj-put" eventType="touchUpInside" id="Rgh-IW-jXW"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q3b-9F-kF7">
                                             <rect key="frame" x="17" y="8" width="94" height="21"/>
@@ -363,6 +369,9 @@
                                                 <constraint firstAttribute="width" constant="30" id="ozS-mV-U7D"/>
                                             </constraints>
                                             <state key="normal" title="Like"/>
+                                            <connections>
+                                                <action selector="likeButtonDidTouch:" destination="qyn-Nj-put" eventType="touchUpInside" id="WEe-nm-mfj"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -407,13 +416,15 @@
                                 <connections>
                                     <outlet property="betLabel" destination="KTs-v7-xen" id="SZU-Hm-yxG"/>
                                     <outlet property="comment" destination="837-Is-lLI" id="Raj-5H-nta"/>
+                                    <outlet property="commentButton" destination="837-Is-lLI" id="tKR-jV-n75"/>
                                     <outlet property="hearts" destination="mAG-QS-j4U" id="gM1-iT-Pbs"/>
-                                    <outlet property="like" destination="dNu-hS-0vI" id="z0i-16-GwE"/>
+                                    <outlet property="likeButton" destination="dNu-hS-0vI" id="9so-q4-0v3"/>
                                     <outlet property="name1" destination="q3b-9F-kF7" id="5TA-nO-vXH"/>
                                     <outlet property="name2" destination="jEh-UD-Lf6" id="Gn7-Nv-Ily"/>
                                     <outlet property="sadFace" destination="hqQ-o4-Isp" id="sNH-Gg-NWV"/>
                                     <outlet property="trophy" destination="VD4-dL-dJL" id="0WD-5m-4cz"/>
                                     <outlet property="vote" destination="jmb-ed-7wB" id="PLP-sB-9bC"/>
+                                    <outlet property="voteButton" destination="jmb-ed-7wB" id="VDp-qS-i4d"/>
                                     <outlet property="witnesses" destination="gem-Eh-6we" id="RfP-ax-9ri"/>
                                 </connections>
                             </tableViewCell>
