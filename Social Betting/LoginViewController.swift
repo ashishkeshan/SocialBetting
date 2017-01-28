@@ -121,27 +121,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         if (result?.isCancelled)!{
             return
         }
-        let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name, first_name, last_name"])
-        request?.start { (connection : FBSDKGraphRequestConnection?, result : Any?, error : Error?) -> Void in
-            
-            var infoDictionary:NSDictionary!
-            
-            if error == nil {
-                infoDictionary = result as! [String:AnyObject] as NSDictionary!
-                self.email = infoDictionary["email"] as! String
-                self.id = infoDictionary["id"] as! String
-                self.name = infoDictionary["name"] as! String
-                self.fName = infoDictionary["first_name"] as! String
-                self.lName = infoDictionary["last_name"] as! String
-                self.username = self.fName + "-" + self.lName
-                self.usernameMap?.setObject(self.username as AnyObject?, forKey: 1 as AnyObject?)
-                let url = NSURL(string: "https://graph.facebook.com/\(self.id)/picture?type=large&return_ssl_resources=1")!
-               if let data = NSData(contentsOf: url as URL) {
-                    self.imageView?.image = UIImage(data: data as Data)
-                }
-                print(self.email + " " + self.id + " " + self.name)
-            }
-        }
+        
+        getUserInfo()
         
         let fbRequest = FBSDKGraphRequest(graphPath:"/me/friends", parameters: nil)
         fbRequest?.start { (connection : FBSDKGraphRequestConnection?, result : Any?, error : Error?) -> Void in
@@ -160,8 +141,22 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 }
             }
             let currUser = User(friendsList: self.friendsList, fullName: self.name, fName: self.fName, lName: self.lName, username: self.username )
+            var val : Int = 0
             let userIndexRef = FIRDatabase.database().reference(withPath: "usernameOptions")
-            userIndexRef.setValue(["\(self.username)": 1])
+            userIndexRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                print(snapshot.childrenCount) // I got the expected number of items
+                let enumerator = snapshot.children
+                while let rest = enumerator.nextObject() as? FIRDataSnapshot {
+                    if self.username == rest.key {
+                        val = rest.value as! Int
+                        val += 1
+                        print("HERERERERERERERE")
+                        
+                    }
+                }
+            })
+            print(val)
+            userIndexRef.updateChildValues(["\(self.username)": val])
             let ref = FIRDatabase.database().reference(withPath: "users")
             let userRef = ref.child(self.id)
             userRef.setValue(currUser.toAnyObject())
@@ -169,9 +164,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
             FIRAuth.auth()?.signIn(with: credential) { (user, error) in
-                // ...
                 if error != nil {
-                    // ...
                     return
                 }
             }
@@ -179,7 +172,33 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         print("Successfully logged in with facebook...")
         }
     }
+    
+    func getUserInfo() {
         
+        let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name, first_name, last_name"])
+        request?.start { (connection : FBSDKGraphRequestConnection?, result : Any?, error : Error?) -> Void in
+            
+            var infoDictionary:NSDictionary!
+            
+            if error == nil {
+                infoDictionary = result as! [String:AnyObject] as NSDictionary!
+                self.email = infoDictionary["email"] as! String
+                self.id = infoDictionary["id"] as! String
+                self.name = infoDictionary["name"] as! String
+                self.fName = infoDictionary["first_name"] as! String
+                self.lName = infoDictionary["last_name"] as! String
+                self.username = self.fName + "-" + self.lName
+                self.usernameMap?.setObject(self.username as AnyObject?, forKey: 1 as AnyObject?)
+                let url = NSURL(string: "https://graph.facebook.com/\(self.id)/picture?type=large&return_ssl_resources=1")!
+                if let data = NSData(contentsOf: url as URL) {
+                    self.imageView?.image = UIImage(data: data as Data)
+                }
+                print(self.email + " " + self.id + " " + self.name)
+            }
+        }
+
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
