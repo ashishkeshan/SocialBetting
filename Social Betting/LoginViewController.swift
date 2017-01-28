@@ -151,7 +151,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                         val = rest.value as! Int
                         val += 1
                         print("HERERERERERERERE")
-                        myGroup.leave()
+                        //myGroup.leave()
                     }
                 }
                 myGroup.leave()
