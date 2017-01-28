@@ -30,6 +30,10 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
     var timePosted: Int = 0
     var posts: [Post] = []
     
+    var isFirstOpening: Bool = true
+    
+    let postFef = FIRDatabase.database().reference(withPath: "posts");
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,34 +85,32 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
         
         let saveAction = UIAlertAction(title: "Save",
                                        style: .default) { _ in
-                                        // 1
-//                                        guard let textFieldOne = alert.textFields?.first,
-                                            let text = self.textFieldOne.text
-                                        
-//                                        guard let textFieldTwo = alert.textFields?.,
-                                            let textTwo = self.textFieldTwo.text
+            // 1
+            let text = self.textFieldOne.text
+        
+            let textTwo = self.textFieldTwo.text
 
-                                        let postComments = ["hella dank", "shit breh dis gg", "u rekt dawg"]
-                                        
-                                        let post = Post(postid: self.count,
-                                                               bet: text!,
-                                                               likes: 0,
-                                                               comments: postComments,
-                                                               witnesses: 0,                     // Show who witnesses are, COME BACK TO THIS LATER
-                                                                better: "William",
-                                                                betted: textTwo!,
-                                                                upvotes: 0,
-                                                                downvotes: 0,
-                                                                timePosted: 1230,
-                                                                key: "this is a key")
-                                        
-                                        // 3
-                                        print("String count is:")
-                                        print(stringCount)
-                                        let postRef = self.ref.child(stringCount)
-                                        
-                                        // 4
-                                        postRef.setValue(post.toAnyObject())
+            let postComments = ["hella dank", "shit breh dis gg", "u rekt dawg"]
+            
+            let post = Post(postid: self.count,
+                            bet: text!,
+                            likes: 0,
+                            comments: postComments,
+                            witnesses: 0,                     // Show who witnesses are, COME BACK TO THIS LATER
+                            better: "William",
+                            betted: textTwo!,
+                            upvotes: 0,
+                            downvotes: 0,
+                            timePosted: 1230,
+                            key: "this is a key")
+            
+            // 3
+            print("String count is:")
+            print(stringCount)
+            let postRef = self.ref.child(stringCount)
+            
+            // 4
+            postRef.setValue(post.toAnyObject())
         }
         
         let cancelAction = UIAlertAction(title: "Cancel",
@@ -133,6 +135,83 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
         textFieldTwo = textField
     }
     
+    func showAlert(cell: BetFeedCellTableViewCell){
+        
+        let id = String(cell.id)
+        let singlePostRef = postFef.child(id)
+        let bettedVotesRef = singlePostRef.child("upVotes")
+        let betterVotesRef = singlePostRef.child("downVotes")
+        
+        let alert = UIAlertController(title: "Who do you vote for?", message: "Choose one", preferredStyle: .alert)
+        
+        let bettedRef = singlePostRef.child("betted")
+        
+        var betted: String = ""
+        bettedRef.observe(.value) { (snap: FIRDataSnapshot) in
+            betted = snap.value as! String
+        }
+        
+        print("BETTED IS:")
+        print(betted)
+        
+        let bettedWillWinAction = UIAlertAction(title: "Save",
+                                                style: .default) { _ in
+            
+                                                    bettedVotesRef.observeSingleEvent(of: .value) { (snap: FIRDataSnapshot) in
+                                                        if(snap.exists()) {
+                                                            print("EXISTS")
+                                                            print(snap.value)
+                                
+                                                            let saveKey = "post" + id
+                                                            
+                                                            // If already voted for the person being betted and tapped again, then - 1 from it.
+                                                            if(cell.didVoteBetted) {
+                                                                singlePostRef.updateChildValues(["upVotes":(snap.value as! Int) - 1])
+                                                                cell.didVoteBetted = false
+                                                            }
+                                                                
+                                                            // If voted for the BETTER and not the current betted, then add 1 to this betted and 
+                                                            // subtract 1 from the better
+                                                            else if(cell.didVoteBetter) {
+                                                                singlePostRef.updateChildValues(["upVotes":(snap.value as! Int) + 1])
+                                                                singlePostRef.updateChildValues(["downVotes":(snap.value as! Int) - 1])
+                                                                cell.didVoteBetted = true
+                                                            }
+                                                        }
+                                                    }
+        }
+        
+        let betterWillWinAction = UIAlertAction(title: "Cancel",
+                                                style: .default) { _ in
+                                                    betterVotesRef.observeSingleEvent(of: .value) { (snap: FIRDataSnapshot) in
+                                                        if(snap.exists()) {
+                                                            print("EXISTS")
+                                                            print(snap.value)
+                                                            
+                                                            let saveKey = "post" + id
+                                                            
+                                                            // If already voted for the BETTER and tapped again, then - 1 from it.
+                                                            if(cell.didVoteBetter) {
+                                                                singlePostRef.updateChildValues(["downVotes":(snap.value as! Int) - 1])
+                                                                cell.didVoteBetted = false
+                                                            }
+                                                                
+                                                                // If voted for the BETTED and not the current betted, then add 1 to this betted and subtract 1 from the better
+                                                            else if(cell.didVoteBetted) {
+                                                                singlePostRef.updateChildValues(["downVotes":(snap.value as! Int) + 1])
+                                                                singlePostRef.updateChildValues(["upVotes":(snap.value as! Int) - 1])
+                                                                cell.didVoteBetted = true
+                                                            }
+                                                        }
+                                                    }
+        }
+        
+        alert.addAction(betterWillWinAction)
+        alert.addAction(bettedWillWinAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -149,7 +228,6 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
         // #warning Incomplete implementation, return the number of rows
         return posts.count
     }
-
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BetFeedCellTableViewCell", for: indexPath) as! BetFeedCellTableViewCell
@@ -161,10 +239,24 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
         cell.configureCell(currPost: configurePost);
         cell.id = configurePost.postID
         
-//        cell.Name2.text = "William W."
-//        cell.bet.text = "10 Pushups or 2 Shots"
-//        cell.numLikes.text = "Heart 100 People"
-//        cell.witnesses.text = "Witnesses"
+        if(isFirstOpening) {
+            let postToGet = "post" + String(configurePost.postID)
+            
+            if let userSelectedColorData  = UserDefaults.standard.object(forKey: postToGet) as? NSData {
+                print("HERE")
+                if let userSelectedColor = NSKeyedUnarchiver.unarchiveObject(with: userSelectedColorData as Data) as? UIColor {
+                    
+                    cell.likeButton.setTitleColor(userSelectedColor, for: UIControlState.normal)
+                }
+            }
+        }
+        
+        let stringID = String(cell.id)
+        
+        cell.voteButton.tag = indexPath.row
+        cell.voteButton.addTarget(self, action: Selector("showAlert:"), for:UIControlEvents.touchUpInside)
+        
+        isFirstOpening = false
 
         return cell
     }
@@ -178,17 +270,17 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
     }
     */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    
+    //Override to support editing the table view.
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+             //Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+             //Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+ 
 
     /*
     // Override to support rearranging the table view.
