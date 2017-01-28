@@ -6,6 +6,8 @@
 //  Copyright © 2016 Ashish Keshan. All rights reserved.
 //
 
+
+// STILL NEED TO FIX WHEN USER IS IN DB AND IS RELOGGING IN!!!!
 import UIKit
 import Foundation
 import Firebase
@@ -140,9 +142,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                     self.friendsList.append(name)
                 }
             }
-            let currUser = User(friendsList: self.friendsList, fullName: self.name, fName: self.fName, lName: self.lName, username: self.username )
-            var val : Int = 0
+            var val : Int = 1
+            let myGroup = DispatchGroup()
             let userIndexRef = FIRDatabase.database().reference(withPath: "usernameOptions")
+            myGroup.enter()
             userIndexRef.observeSingleEvent(of: .value, with: { (snapshot) in
                 print(snapshot.childrenCount) // I got the expected number of items
                 let enumerator = snapshot.children
@@ -151,25 +154,34 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                         val = rest.value as! Int
                         val += 1
                         print("HERERERERERERERE")
+                        myGroup.leave()
                         
                     }
                 }
             })
-            print(val)
-            userIndexRef.updateChildValues(["\(self.username)": val])
-            let ref = FIRDatabase.database().reference(withPath: "users")
-            let userRef = ref.child(self.id)
-            userRef.setValue(currUser.toAnyObject())
-            
-            
-            let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-            FIRAuth.auth()?.signIn(with: credential) { (user, error) in
-                if error != nil {
-                    return
+            myGroup.notify(queue: DispatchQueue.main, execute: {
+                print("Finished all requests.")
+                print("THE VALUE IS:", val)
+                userIndexRef.updateChildValues(["\(self.username)": val])
+                if val != 1 {
+                    val -= 1
+                    let stringVal = String(val)
+                    self.username += stringVal
                 }
-            }
-        self.performSegue(withIdentifier: "showFeed", sender: nil)
-        print("Successfully logged in with facebook...")
+                let currUser = User(friendsList: self.friendsList, fullName: self.name, fName: self.fName, lName: self.lName, username: self.username )
+                let ref = FIRDatabase.database().reference(withPath: "users")
+                let userRef = ref.child(self.id)
+                userRef.setValue(currUser.toAnyObject())
+            
+                let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+                    if error != nil {
+                        return
+                    }
+                }
+                self.performSegue(withIdentifier: "showFeed", sender: nil)
+                print("Successfully logged in with facebook...")
+            })
         }
     }
     
