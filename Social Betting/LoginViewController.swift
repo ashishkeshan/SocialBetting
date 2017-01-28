@@ -154,6 +154,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                         myGroup.leave()
                     }
                 }
+                myGroup.leave()
             })
             myGroup.notify(queue: DispatchQueue.main, execute: {
                 print("Finished all requests.")
