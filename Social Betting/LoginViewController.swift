@@ -30,11 +30,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        //imageView?.center = CGPoint(x: view.center.x, y: 150)
-        //imageView?.image = UIImage(named: "silhouette.png")
-        //view.addSubview(imageView!)
-        
         let loginButton = FBSDKLoginButton()
         loginButton.readPermissions = ["public_profile", "email", "user_friends"]
         view.addSubview(loginButton)
@@ -147,7 +142,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             let userIndexRef = FIRDatabase.database().reference(withPath: "usernameOptions")
             myGroup.enter()
             userIndexRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                print(snapshot.childrenCount) // I got the expected number of items
+                if snapshot.childrenCount == 0{
+                    myGroup.leave()
+                }// I got the expected number of items
                 let enumerator = snapshot.children
                 while let rest = enumerator.nextObject() as? FIRDataSnapshot {
                     if self.username == rest.key {
@@ -155,7 +152,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                         val += 1
                         print("HERERERERERERERE")
                         myGroup.leave()
-                        
                     }
                 }
             })
