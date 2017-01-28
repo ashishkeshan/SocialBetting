@@ -18,18 +18,27 @@ class BetFeedCellTableViewCell: UITableViewCell {
     @IBOutlet var name2: UILabel!
     @IBOutlet var hearts: UILabel!
     @IBOutlet var witnesses: UILabel!
-    @IBOutlet var like: UIButton!
+    @IBOutlet weak var like: UIButton!
     @IBOutlet var comment: UIButton!
-    @IBOutlet var vote: UIButton!
     @IBOutlet var trophy: UIImageView!
     @IBOutlet var sadFace: UIImageView!
     @IBOutlet weak var betLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
+    @IBOutlet weak var upVotes: UILabel!
+    @IBOutlet weak var downVotes: UILabel!
     @IBOutlet weak var voteButton: UIButton!
     
+    var didVoteBetted: Bool = false
+    var didVoteBetter: Bool = false
+    var alreadyVoted: Bool = false
     
-    let postFef = FIRDatabase.database().reference(withPath: "posts");
+    let postFef = FIRDatabase.database().reference(withPath: "posts")
+    
+//    lazy var idString = String(id)
+//    
+//    lazy var stringID = idString
+//
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -57,11 +66,11 @@ class BetFeedCellTableViewCell: UITableViewCell {
         print("THE ID IS: ")
         print(id)
         
+        var likeValue: Int = 0
+        
         let stringID = String(id)
         
-        let singlePostRef = self.postFef.child(stringID)
-        
-        var likeValue: Int = 0
+        let singlePostRef = postFef.child(stringID)
         
         let testRef = singlePostRef.child("likes")
         
@@ -70,31 +79,35 @@ class BetFeedCellTableViewCell: UITableViewCell {
                 print("EXISTS")
                 print(snap.value)
 //                likeValue = snap.value as! Int
-                
+                let saveKey = "post" + stringID
                 if(self.likeButton.titleColor(for: UIControlState.normal) != UIColor.red) {
                     singlePostRef.updateChildValues(["likes":(snap.value as! Int) + 1])
                     self.likeButton.setTitleColor(UIColor.red, for: UIControlState.normal)
+                    var colorToSetAsDefault : UIColor = UIColor.red
+                    var data : NSData = NSKeyedArchiver.archivedData(withRootObject: colorToSetAsDefault) as NSData
+                    UserDefaults.standard.set(data, forKey: saveKey)
+                    UserDefaults.standard.synchronize()
+                    print("SET DEFAULT USER COLOR TO RED")
                 }
                 else {
                     singlePostRef.updateChildValues(["likes":(snap.value as! Int) - 1])
                     self.likeButton.setTitleColor(UIColor.blue, for: UIControlState.normal)
+                    var colorToSetAsDefault : UIColor = UIColor.blue
+                    var data : NSData = NSKeyedArchiver.archivedData(withRootObject: colorToSetAsDefault) as NSData
+                    UserDefaults.standard.set(data, forKey: saveKey)
+                    UserDefaults.standard.synchronize()
+                    print("SET DEFAULT USER COLOR TO BLUE")
                 }
             }
         }
         
-        let defaults = UserDefaults.standard
         
-        let saveKey = "post" + String(id)
         
         // ---------------------------------- COME BACK TO THIS --------------------------- //
 //        var userSelectedColor : NSData? = (UserDefaults.standard.object(forKey: saveKey) as? NSData)
 //
 //        if (userSelectedColor != nil) {
-            var colorToSetAsDefault : UIColor = self.likeButton.titleColor(for: UIControlState.normal)!
-            var data : NSData = NSKeyedArchiver.archivedData(withRootObject: colorToSetAsDefault) as NSData
-            UserDefaults.standard.set(data, forKey: saveKey)
-            UserDefaults.standard.synchronize()
-            print("SET DEFAULT USER COLOR TO RED")
+        
 //        }
         
         print("LIKE VALUE IS:")
@@ -105,6 +118,7 @@ class BetFeedCellTableViewCell: UITableViewCell {
     }
     
     @IBAction func voteButtonDidTouch(_ sender: Any) {
+        
     }
     
 

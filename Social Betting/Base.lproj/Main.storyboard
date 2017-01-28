@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ol6-DI-7wf">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ol6-DI-7wf">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -242,7 +242,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="39x-Hg-BRa" id="KvC-9r-JPi">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -280,7 +280,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="136"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qyn-Nj-put" id="fEh-mj-9Oy">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="135.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="837-Is-lLI">
@@ -341,13 +341,13 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VD4-dL-dJL">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Trophy" translatesAutoresizingMaskIntoConstraints="NO" id="VD4-dL-dJL">
                                             <rect key="frame" x="279" y="28" width="32" height="29"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="29" id="8e3-2c-imH"/>
                                             </constraints>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hqQ-o4-Isp">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sadFace" translatesAutoresizingMaskIntoConstraints="NO" id="hqQ-o4-Isp">
                                             <rect key="frame" x="279" y="59.5" width="32" height="30"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KTs-v7-xen">
@@ -373,6 +373,27 @@
                                                 <action selector="likeButtonDidTouch:" destination="qyn-Nj-put" eventType="touchUpInside" id="WEe-nm-mfj"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zme-Qf-5sX">
+                                            <rect key="frame" x="300" y="8" width="42" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Uf-sP-5BU">
+                                            <rect key="frame" x="319" y="32" width="42" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AmU-36-Vlb">
+                                            <rect key="frame" x="319" y="64" width="42" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="VD4-dL-dJL" firstAttribute="trailing" secondItem="hqQ-o4-Isp" secondAttribute="trailing" id="0L1-Y6-4vj"/>
@@ -417,14 +438,16 @@
                                     <outlet property="betLabel" destination="KTs-v7-xen" id="SZU-Hm-yxG"/>
                                     <outlet property="comment" destination="837-Is-lLI" id="Raj-5H-nta"/>
                                     <outlet property="commentButton" destination="837-Is-lLI" id="tKR-jV-n75"/>
+                                    <outlet property="downVotes" destination="AmU-36-Vlb" id="TAD-J6-22M"/>
                                     <outlet property="hearts" destination="mAG-QS-j4U" id="gM1-iT-Pbs"/>
+                                    <outlet property="like" destination="dNu-hS-0vI" id="Ny3-Qn-pX1"/>
                                     <outlet property="likeButton" destination="dNu-hS-0vI" id="9so-q4-0v3"/>
                                     <outlet property="name1" destination="q3b-9F-kF7" id="5TA-nO-vXH"/>
                                     <outlet property="name2" destination="jEh-UD-Lf6" id="Gn7-Nv-Ily"/>
                                     <outlet property="sadFace" destination="hqQ-o4-Isp" id="sNH-Gg-NWV"/>
                                     <outlet property="trophy" destination="VD4-dL-dJL" id="0WD-5m-4cz"/>
-                                    <outlet property="vote" destination="jmb-ed-7wB" id="PLP-sB-9bC"/>
-                                    <outlet property="voteButton" destination="jmb-ed-7wB" id="VDp-qS-i4d"/>
+                                    <outlet property="upVotes" destination="5Uf-sP-5BU" id="8tC-WQ-dRD"/>
+                                    <outlet property="voteButton" destination="jmb-ed-7wB" id="keY-qI-Omr"/>
                                     <outlet property="witnesses" destination="gem-Eh-6we" id="RfP-ax-9ri"/>
                                 </connections>
                             </tableViewCell>
@@ -599,6 +622,8 @@
         <image name="Invite Friends.png" width="42" height="42"/>
         <image name="Profile.png" width="66" height="63"/>
         <image name="Silhouette" width="256" height="256"/>
+        <image name="Trophy" width="51" height="51"/>
+        <image name="sadFace" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vwA-YC-sfc"/>
