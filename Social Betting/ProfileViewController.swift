@@ -7,15 +7,22 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseStorage
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var profileImage: UIImageView!
+    
 
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var betSenseLabel: UILabel!
     @IBOutlet weak var totalBetsLabel: UILabel!
+    
+    let user = FIRAuth.auth()?.currentUser
+    
+    let ref = FIRDatabase.database().reference(withPath: "users")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +44,27 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func handleSelectProfileImageView() {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = true
-        present(picker, animated: true, completion: nil)
-    
+        let actionSheetController: UIAlertController = UIAlertController(title: "Action Sheet", message: "Swiftly Now! Choose an option!", preferredStyle: .actionSheet)
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
+            //Just dismiss the action sheet
+        }
+        actionSheetController.addAction(cancelAction)
+        //Create and add first option action
+        let takePictureAction: UIAlertAction = UIAlertAction(title: "Take Picture", style: .default) { action -> Void in
+            //Code for launching the camera goes here
+        }
+        actionSheetController.addAction(takePictureAction)
+        //Create and add a second option action
+        let choosePictureAction: UIAlertAction = UIAlertAction(title: "Choose From Camera Roll", style: .default) { action -> Void in
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.allowsEditing = true
+            self.present(picker, animated: true, completion: nil)
+        }
+        actionSheetController.addAction(choosePictureAction)
+        
+        //Present the AlertController
+        self.present(actionSheetController, animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -54,17 +77,31 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         var selectedImageFromPicker: UIImage?
         
         if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
-//            print((editedImage as AnyObject).size)
+            //print((editedImage as AnyObject).size)
             selectedImageFromPicker = editedImage
             
         } else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
-            
-//            print((originalImage as AnyObject).size)
+           // print((originalImage as AnyObject).size)
             selectedImageFromPicker = originalImage as? UIImage
         }
         
         if let selectedImage = selectedImageFromPicker {
             profileImage.image = selectedImage
+            let storageRef = FIRStorage.storage().reference().child("\(usernameLabel.text!).png")
+            if let uploadData = UIImagePNGRepresentation(self.profileImage.image!) {
+                storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in
+                    if error != nil {
+                        print(error)
+                        return
+                    }
+                    else{
+                        let userRef = self.ref.child((self.user?.uid)!)
+                        
+                        
+                        print(metadata)
+                    }
+                })
+            }
         }
         
         print(info)

@@ -151,7 +151,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                         val = rest.value as! Int
                         val += 1
                         print("HERERERERERERERE")
-                        //myGroup.leave()
                     }
                 }
                 myGroup.leave()
@@ -167,11 +166,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 }
                 let currUser = User(friendsList: self.friendsList, fullName: self.name, fName: self.fName, lName: self.lName, username: self.username )
                 let ref = FIRDatabase.database().reference(withPath: "users")
-                let userRef = ref.child(self.id)
-                userRef.setValue(currUser.toAnyObject())
-            
+
                 let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                 FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+                    let userRef = ref.child((user?.uid)!)
+                    userRef.setValue(currUser.toAnyObject())
                     if error != nil {
                         return
                     }
