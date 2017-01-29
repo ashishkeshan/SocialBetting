@@ -115,6 +115,7 @@ class BetFeedCellTableViewCell: UITableViewCell {
     }
     
     @IBAction func commentButtonDidTouch(_ sender: Any) {
+        performSegueWithIdentifier("showComments", sender: self)
     }
     
     @IBAction func voteButtonDidTouch(_ sender: Any) {
