@@ -11,7 +11,7 @@ import Firebase
 import FirebaseDatabase
 
 
-class BetFeedTableViewController: UIViewController, UITableViewDataSource {
+class BetFeedTableViewController: UIViewController, UITableViewDataSource, AlertProtocol {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var sideMenuButton: UIBarButtonItem!
@@ -145,73 +145,128 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
         let alert = UIAlertController(title: "Who do you vote for?", message: "Choose one", preferredStyle: .alert)
         
         let bettedRef = singlePostRef.child("betted")
+        let betterRef = singlePostRef.child("better")
         
         var betted: String = ""
-        bettedRef.observe(.value) { (snap: FIRDataSnapshot) in
+        var better: String = ""
+        
+        var upVotesBettedValue: Int = 0
+        var downVotesBetterValue: Int = 0
+        
+        // Asynchronous, begin Dispatch Group
+        let myGroup = DispatchGroup()
+        
+        myGroup.enter()
+        bettedRef.observeSingleEvent(of: .value, with: {(snap) in
             betted = snap.value as! String
+        })
+        
+        bettedVotesRef.observeSingleEvent(of: .value) { (snap: FIRDataSnapshot) in
+            upVotesBettedValue = snap.value as! Int
         }
         
-        print("BETTED IS:")
-        print(betted)
-        
-        let bettedWillWinAction = UIAlertAction(title: "Save",
-                                                style: .default) { _ in
-            
-                                                    bettedVotesRef.observeSingleEvent(of: .value) { (snap: FIRDataSnapshot) in
-                                                        if(snap.exists()) {
-                                                            print("EXISTS")
-                                                            print(snap.value)
-                                
-                                                            let saveKey = "post" + id
-                                                            
-                                                            // If already voted for the person being betted and tapped again, then - 1 from it.
-                                                            if(cell.didVoteBetted) {
-                                                                singlePostRef.updateChildValues(["upVotes":(snap.value as! Int) - 1])
-                                                                cell.didVoteBetted = false
-                                                            }
-                                                                
-                                                            // If voted for the BETTER and not the current betted, then add 1 to this betted and 
-                                                            // subtract 1 from the better
-                                                            else if(cell.didVoteBetter) {
-                                                                singlePostRef.updateChildValues(["upVotes":(snap.value as! Int) + 1])
-                                                                singlePostRef.updateChildValues(["downVotes":(snap.value as! Int) - 1])
-                                                                cell.didVoteBetted = true
-                                                            }
-                                                        }
-                                                    }
+        betterVotesRef.observeSingleEvent(of: .value) { (snap: FIRDataSnapshot) in
+            downVotesBetterValue = snap.value as! Int
         }
         
-        let betterWillWinAction = UIAlertAction(title: "Cancel",
-                                                style: .default) { _ in
-                                                    betterVotesRef.observeSingleEvent(of: .value) { (snap: FIRDataSnapshot) in
-                                                        if(snap.exists()) {
-                                                            print("EXISTS")
-                                                            print(snap.value)
-                                                            
-                                                            let saveKey = "post" + id
-                                                            
-                                                            // If already voted for the BETTER and tapped again, then - 1 from it.
-                                                            if(cell.didVoteBetter) {
-                                                                singlePostRef.updateChildValues(["downVotes":(snap.value as! Int) - 1])
-                                                                cell.didVoteBetted = false
-                                                            }
-                                                                
-                                                                // If voted for the BETTED and not the current betted, then add 1 to this betted and subtract 1 from the better
-                                                            else if(cell.didVoteBetted) {
-                                                                singlePostRef.updateChildValues(["downVotes":(snap.value as! Int) + 1])
-                                                                singlePostRef.updateChildValues(["upVotes":(snap.value as! Int) - 1])
-                                                                cell.didVoteBetted = true
-                                                            }
-                                                        }
-                                                    }
-        }
         
-        alert.addAction(betterWillWinAction)
-        alert.addAction(bettedWillWinAction)
-        
-        present(alert, animated: true, completion: nil)
-    }
+        betterRef.observeSingleEvent(of: .value , with: {(snap) in
+            better = snap.value as! String
+            // Functions done, move on to next thing. Put in Async block to tell program that async is done
+            myGroup.leave()
+        })
     
+        myGroup.notify(queue: DispatchQueue.main, execute: {
+            print("BETTED IS:")
+            print(betted)
+            
+            print("BETTER IS:")
+            print(better)
+            
+            betted = "Betted: " + betted
+            better = "Better: " + better
+            
+            let bettedWillWinAction = UIAlertAction(title: betted,
+                                                    style: .default) { _ in
+                bettedVotesRef.observeSingleEvent(of: .value) { (snap: FIRDataSnapshot) in
+                    if(snap.exists()) {
+                        print("EXISTS")
+                        print(snap.value)
+                        
+                        upVotesBettedValue = snap.value as! Int
+                        
+                        // If already voted for the person being betted and tapped again, then - 1 from it.
+                        if(cell.didVoteBetted && !cell.didVoteBetter) {
+                            singlePostRef.updateChildValues(["upVotes":(snap.value as! Int) - 1])
+                            print("NEW VALUE IS:")
+                            print(snap.value)
+                            cell.didVoteBetted = false
+                            
+                        }
+                            
+                        // If voted for the BETTER and not the current betted, then add 1 to this betted and
+                        // subtract 1 from the better
+                        else if(cell.didVoteBetter && !cell.didVoteBetted) {
+                            singlePostRef.updateChildValues(["upVotes":(snap.value as! Int) + 1])
+                            singlePostRef.updateChildValues(["downVotes":(downVotesBetterValue as! Int) - 1])
+                            cell.didVoteBetted = true
+                            cell.didVoteBetter = false
+                        }
+                        
+                        else if(!cell.didVoteBetter && !cell.didVoteBetted) {
+                            singlePostRef.updateChildValues(["upVotes":(snap.value as! Int) + 1])
+                            print("NEW VALUE IS:")
+                            print(snap.value)
+                            cell.didVoteBetted = true
+                        }
+                    }
+                }
+            }
+            
+            let betterWillWinAction = UIAlertAction(title: better,
+                                                    style: .default) { _ in
+                betterVotesRef.observeSingleEvent(of: .value) { (snap: FIRDataSnapshot) in
+                    if(snap.exists()) {
+                        print("EXISTS")
+                        print(snap.value)
+                        
+                        // If already voted for the BETTER and tapped again, then - 1 from it.
+                        if(cell.didVoteBetter && !cell.didVoteBetted) {
+                            singlePostRef.updateChildValues(["downVotes":(snap.value as! Int) - 1])
+                            cell.didVoteBetter = false
+                        }
+                            
+                        // If voted for the BETTED and not the current better, then add 1 to this betted and subtract 1 from the better
+                        else if(cell.didVoteBetted && !cell.didVoteBetter) {
+                            singlePostRef.updateChildValues(["downVotes":(snap.value as! Int) + 1])
+                            singlePostRef.updateChildValues(["upVotes":(upVotesBettedValue as! Int) - 1])
+                            cell.didVoteBetted = false
+                            cell.didVoteBetter = true
+                        }
+                        
+                        else if(!cell.didVoteBetter && !cell.didVoteBetted) {
+                            singlePostRef.updateChildValues(["downVotes":(snap.value as! Int) + 1])
+                            print("NEW VALUE IS:")
+                            print(snap.value)
+                            cell.didVoteBetter = true
+                        }
+                    }
+                }
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel",
+                                             style: .default)
+            
+            alert.addAction(betterWillWinAction)
+            alert.addAction(bettedWillWinAction)
+            alert.addAction(cancelAction)
+            
+            self.present(alert, animated: true, completion: nil)
+            
+//            completion(result: fill)
+        })
+}
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -232,6 +287,8 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BetFeedCellTableViewCell", for: indexPath) as! BetFeedCellTableViewCell
 
+        cell.cellDelegate = self
+        
         let configurePost = posts[indexPath.row]
         
         // Configure the cell...
@@ -253,8 +310,8 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource {
         
         let stringID = String(cell.id)
         
-        cell.voteButton.tag = indexPath.row
-        cell.voteButton.addTarget(self, action: Selector("showAlert:"), for:UIControlEvents.touchUpInside)
+//        cell.voteButton.tag = indexPath.row
+//        cell.voteButton.addTarget(self, action: Selector("showAlert:"), for:UIControlEvents.touchUpInside)
         
         isFirstOpening = false
 

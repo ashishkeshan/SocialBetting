@@ -10,6 +10,10 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
+protocol AlertProtocol : class {    // 'class' means only class types can implement it
+    func showAlert(cell: BetFeedCellTableViewCell) -> Void
+}
+
 class BetFeedCellTableViewCell: UITableViewCell {
     
     public var id: Int = 0
@@ -27,7 +31,6 @@ class BetFeedCellTableViewCell: UITableViewCell {
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var upVotes: UILabel!
     @IBOutlet weak var downVotes: UILabel!
-    @IBOutlet weak var voteButton: UIButton!
     
     var didVoteBetted: Bool = false
     var didVoteBetter: Bool = false
@@ -35,10 +38,7 @@ class BetFeedCellTableViewCell: UITableViewCell {
     
     let postFef = FIRDatabase.database().reference(withPath: "posts")
     
-//    lazy var idString = String(id)
-//    
-//    lazy var stringID = idString
-//
+    var cellDelegate: AlertProtocol?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -118,8 +118,8 @@ class BetFeedCellTableViewCell: UITableViewCell {
     }
     
     @IBAction func voteButtonDidTouch(_ sender: Any) {
-        
+        self.cellDelegate?.showAlert(cell: self)
     }
     
-
+    
 }

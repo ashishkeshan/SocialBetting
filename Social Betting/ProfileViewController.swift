@@ -54,12 +54,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         var selectedImageFromPicker: UIImage?
         
         if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
-            print((editedImage as AnyObject).size)
+//            print((editedImage as AnyObject).size)
             selectedImageFromPicker = editedImage
             
         } else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
             
-            print((originalImage as AnyObject).size)
+//            print((originalImage as AnyObject).size)
             selectedImageFromPicker = originalImage as? UIImage
         }
         
