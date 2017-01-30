@@ -218,7 +218,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="39x-Hg-BRa" id="KvC-9r-JPi">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -256,7 +256,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="136"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qyn-Nj-put" id="fEh-mj-9Oy">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="135.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="837-Is-lLI">
@@ -268,6 +268,7 @@
                                             <state key="normal" title="Comment"/>
                                             <connections>
                                                 <action selector="commentButtonDidTouch:" destination="qyn-Nj-put" eventType="touchUpInside" id="F74-Sg-8SX"/>
+                                                <segue destination="7i1-j6-RDX" kind="show" id="NSZ-ER-qXY"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jmb-ed-7wB">
@@ -453,7 +454,6 @@
                     <connections>
                         <outlet property="sideMenuButton" destination="b4b-pW-kTL" id="hTW-O3-rxV"/>
                         <outlet property="tableView" destination="CIM-a7-udv" id="Cqd-zg-RqH"/>
-                        <segue destination="7i1-j6-RDX" kind="show" identifier="showComments" id="MGY-CV-gvc"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hsS-qU-06U" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -518,7 +518,13 @@
                             <outlet property="delegate" destination="VCu-t1-iJB" id="EAz-wT-Qlr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="apa-Tb-j3l"/>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="apa-Tb-j3l">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="dMJ-91-PtB">
+                            <connections>
+                                <segue destination="VV1-Of-eMZ" kind="show" id="5ds-3G-DnF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XRD-Hn-c9X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -683,5 +689,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vwA-YC-sfc"/>
+        <segue reference="5ds-3G-DnF"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -300,7 +300,6 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, Alert
             let postToGet = "post" + String(configurePost.postID)
             
             if let userSelectedColorData  = UserDefaults.standard.object(forKey: postToGet) as? NSData {
-                print("HERE")
                 if let userSelectedColor = NSKeyedUnarchiver.unarchiveObject(with: userSelectedColorData as Data) as? UIColor {
                     
                     cell.likeButton.setTitleColor(userSelectedColor, for: UIControlState.normal)
@@ -308,7 +307,7 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, Alert
             }
         }
         
-        let stringID = String(cell.id)
+//        let stringID = String(cell.id)
         
 //        cell.voteButton.tag = indexPath.row
 //        cell.voteButton.addTarget(self, action: Selector("showAlert:"), for:UIControlEvents.touchUpInside)
