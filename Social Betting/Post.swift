@@ -51,6 +51,7 @@ struct Post {
         upVotes = snapshotValue["upVotes"] as! Int
         downVotes = snapshotValue["downVotes"] as! Int
         
+        // Convert date to a string if necessary. If not, then keep it
         var numberThingString: String = ""
         
         if let result_number = snapshotValue["timePosted"] as? NSNumber
@@ -65,14 +66,14 @@ struct Post {
         }
         
         
-        print("TYPE OF NUMBERTHING")
-        print(numberThingString)
-        print(type(of: numberThingString))
+//        print("TYPE OF NUMBERTHING")
+//        print(numberThingString)
+//        print(type(of: numberThingString))
         timePosted = numberThingString
-        
-        print("IN INIT FUNCTION, PRINTING NUMBER THING STRING")
-        print(numberThingString)
-        print(type(of:timePosted))
+//
+//        print("IN INIT FUNCTION, PRINTING NUMBER THING STRING")
+//        print(numberThingString)
+//        print(type(of:timePosted))
         likes = snapshotValue["likes"] as! Int
         witnesses = snapshotValue["witnesses"] as! Int
         ref = nil
