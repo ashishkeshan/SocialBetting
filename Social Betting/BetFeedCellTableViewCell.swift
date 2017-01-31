@@ -31,6 +31,7 @@ class BetFeedCellTableViewCell: UITableViewCell {
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var upVotes: UILabel!
     @IBOutlet weak var downVotes: UILabel!
+    @IBOutlet weak var postTime: UILabel!
     
     var didVoteBetted: Bool = false
     var didVoteBetter: Bool = false
@@ -58,6 +59,10 @@ class BetFeedCellTableViewCell: UITableViewCell {
         self.betLabel.text = currPost.bet
         self.hearts.text = String(currPost.likes)
         self.witnesses.text = String(currPost.witnesses)
+        self.postTime.text = currPost.timePosted
+        
+        print("IN CONFIGURE FUNCTION")
+        print(type(of:currPost.timePosted))
         
     }
     

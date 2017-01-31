@@ -22,11 +22,11 @@ struct Post {
     let betted: String
     let upVotes: Int
     let downVotes: Int
-    let timePosted: Int
+    let timePosted: String
     let ref: FIRDatabaseReference?
     
     init(postid: Int, bet: String, likes: Int, comments: Array<String>, witnesses: Int, better: String,
-         betted: String, upvotes: Int, downvotes: Int, timePosted: Int, key: String = "") {
+         betted: String, upvotes: Int, downvotes: Int, timePosted: String, key: String = "") {
         self.key = key
         self.postID = postid
         self.bet = bet
@@ -50,7 +50,29 @@ struct Post {
         better = snapshotValue["better"] as! String
         upVotes = snapshotValue["upVotes"] as! Int
         downVotes = snapshotValue["downVotes"] as! Int
-        timePosted = snapshotValue["timePosted"] as! Int
+        
+        var numberThingString: String = ""
+        
+        if let result_number = snapshotValue["timePosted"] as? NSNumber
+        {
+            numberThingString = "\(result_number)"
+            print("INSIDE IF STATEMENT")
+            print(numberThingString)
+        }
+        
+        else {
+            numberThingString = snapshotValue["timePosted"] as! String
+        }
+        
+        
+        print("TYPE OF NUMBERTHING")
+        print(numberThingString)
+        print(type(of: numberThingString))
+        timePosted = numberThingString
+        
+        print("IN INIT FUNCTION, PRINTING NUMBER THING STRING")
+        print(numberThingString)
+        print(type(of:timePosted))
         likes = snapshotValue["likes"] as! Int
         witnesses = snapshotValue["witnesses"] as! Int
         ref = nil

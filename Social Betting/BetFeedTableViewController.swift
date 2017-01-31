@@ -10,7 +10,6 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-
 class BetFeedTableViewController: UIViewController, UITableViewDataSource, AlertProtocol {
     
     @IBOutlet var tableView: UITableView!
@@ -92,6 +91,29 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, Alert
 
             let postComments = ["hella dank", "shit breh dis gg", "u rekt dawg"]
             
+            // Specify date components
+            // get the current date and time
+            let currentDateTime = Date()
+            
+            // initialize the date formatter and set the style
+            let formatter = DateFormatter()
+            formatter.timeStyle = .medium
+            formatter.dateStyle = .long
+            
+            // get the date time String from the date object
+            formatter.string(from: currentDateTime) // October 8, 2016 at 10:48:53 PM
+                                        
+            // "10/8/16, 10:52 PM"
+            formatter.timeStyle = .short
+            formatter.dateStyle = .short
+            print("CURRENT DATE TIME")
+            print(formatter.string(from: currentDateTime))
+            
+            let currTime = formatter.string(from: currentDateTime)
+                                        
+//            print("THE DATE TIME IS: ")
+            print(currTime)
+            print(type(of: currTime)) // Is String here
             let post = Post(postid: self.count,
                             bet: text!,
                             likes: 0,
@@ -101,7 +123,7 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, Alert
                             betted: textTwo!,
                             upvotes: 0,
                             downvotes: 0,
-                            timePosted: 1230,
+                            timePosted: currTime,
                             key: "this is a key")
             
             // 3
