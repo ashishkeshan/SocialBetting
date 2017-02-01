@@ -26,6 +26,7 @@ class BetFeedCellTableViewCell: UITableViewCell {
     @IBOutlet var comment: UIButton!
     @IBOutlet var trophy: UIImageView!
     @IBOutlet var sadFace: UIImageView!
+    @IBOutlet weak var heartImage: UIImageView!
     @IBOutlet weak var betLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!

@@ -144,7 +144,6 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, Alert
         present(alert, animated: true, completion: nil)
     }
     
-    
     func addTextField1(textField: UITextField!)
     {
         textField.placeholder = "Enter bet"
