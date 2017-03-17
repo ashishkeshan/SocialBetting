@@ -23,7 +23,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     let user = FIRAuth.auth()?.currentUser
     
     let ref = FIRDatabase.database().reference(withPath: "users")
-    
+    var userRef = FIRDatabase.database().reference()
+    var profileRef = FIRDatabase.database().reference()
     override func viewDidLoad() {
         super.viewDidLoad()
         profileImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectProfileImageView)))
@@ -34,6 +35,29 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         profileImage.layer.borderColor = UIColor.black.cgColor
         profileImage.layer.cornerRadius = profileImage.frame.height/2
         profileImage.clipsToBounds = true
+        
+        userRef = ref.child((self.user?.uid)!)
+        profileRef = userRef.child("profileImageURL")
+        profileRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? String
+            if value != nil {
+                let profileImageURL = value
+                let url = NSURL(string: profileImageURL!)
+                let request = URLRequest(url: url! as URL)
+                URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
+                    if error != nil {
+                        print(error ?? "error")
+                        return
+                    }
+                    else{
+                        DispatchQueue.main.async {
+                            self.profileImage.image = UIImage(data: data!)
+                        }
+                    }
+                    
+                }).resume()
+            }
+        })
         
         if self.revealViewController() != nil {
             menuButton?.target = self.revealViewController()
@@ -95,9 +119,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                         return
                     }
                     else{
-                        let userRef = self.ref.child((self.user?.uid)!)
-                        
-                        
+                        if let profileImageURL = metadata?.downloadURL()?.absoluteString {
+                            self.profileRef.setValue(profileImageURL)
+                        }
                         print(metadata)
                     }
                 })
