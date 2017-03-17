@@ -17,6 +17,7 @@ protocol AlertProtocol : class {    // 'class' means only class types can implem
 class BetFeedCellTableViewCell: UITableViewCell {
     
     public var id: Int = 0
+    public var row: Int = 0
     
     @IBOutlet var name1: UILabel!
     @IBOutlet var name2: UILabel!

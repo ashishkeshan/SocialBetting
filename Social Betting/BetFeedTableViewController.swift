@@ -30,11 +30,13 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, Alert
     var posts: [Post] = []
     
     var isFirstOpening: Bool = true
+    var rowToReload: Int = 0;
     
     let postFef = FIRDatabase.database().reference(withPath: "posts");
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("IN VIEWDIDLOAD")
         
         if self.revealViewController() != nil {
             sideMenuButton?.target = self.revealViewController()
@@ -51,19 +53,36 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, Alert
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated);
+        print("IN VIEWDIDAPPEAR")
+//        if(rowToReload != 0) {
+//            let indexPath = IndexPath(item: rowToReload, section: 0)
+//            tableView.reloadRows(at: [indexPath], with: .top)
+//            rowToReload = 0;
+//        }
         
-        ref.observe(.value) { (snap: FIRDataSnapshot) in
-            self.posts.removeAll()
-//            print(snap.childrenCount) // I got the expected number of items
-            let enumerator = snap.children
-            while let rest = enumerator.nextObject() as? FIRDataSnapshot {
-                let currPost = Post(snapshot: rest )
-                self.posts.append(currPost)
-//                print(currPost.betted)
-                self.tableView.reloadData()
-            }
+//        else {
+            print("IN VIEWDIDAPPEAR 2")
+            ref.observe(.value) { (snap: FIRDataSnapshot) in
+                if(self.rowToReload != 0) {
+                    print("RELOADING ONLY ONE ROW")
+                    let indexPath = IndexPath(item: self.rowToReload, section: 0)
+                    self.tableView.reloadRows(at: [indexPath], with: .top)
+                    self.rowToReload = 0;
+                }
+                
+                else {
+                    self.posts.removeAll()
+        //            print(snap.childrenCount) // I got the expected number of items
+                    let enumerator = snap.children
+                    while let rest = enumerator.nextObject() as? FIRDataSnapshot {
+                        let currPost = Post(snapshot: rest )
+                        self.posts.append(currPost)
+                        print("LITERALLY ABOUT TO RELOAD TABLE DATA")
+                        self.tableView.reloadData()
+                    }
+                }
+//            }
         }
-        
     }
     
     @IBAction func addButtonDidTouch(_ sender: Any) {
@@ -190,7 +209,6 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, Alert
             downVotesBetterValue = snap.value as! Int
         }
         
-        
         betterRef.observeSingleEvent(of: .value , with: {(snap) in
             better = snap.value as! String
             // Functions done, move on to next thing. Put in Async block to tell program that async is done
@@ -242,6 +260,10 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, Alert
                         }
                     }
                 }
+                self.rowToReload = cell.row;
+//                                                        print(self.rowToReload);
+//                let indexPath = IndexPath(item: self.rowToReload, section: 0)
+//                self.tableView.reloadRows(at: [indexPath], with: .top)
             }
             
             let betterWillWinAction = UIAlertAction(title: better,
@@ -273,6 +295,10 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, Alert
                         }
                     }
                 }
+                self.rowToReload = cell.row;
+//                                                        print(self.rowToReload);
+//                let indexPath = IndexPath(item: self.rowToReload, section: 0)
+//                self.tableView.reloadRows(at: [indexPath], with: .top)
             }
             
             let cancelAction = UIAlertAction(title: "Cancel",
@@ -283,8 +309,6 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, Alert
             alert.addAction(cancelAction)
             
             self.present(alert, animated: true, completion: nil)
-            
-//            completion(result: fill)
         })
 }
 
@@ -307,6 +331,8 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, Alert
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BetFeedCellTableViewCell", for: indexPath) as! BetFeedCellTableViewCell
+        
+        print("IN CELLFORROWATINDEXPATH")
 
         cell.cellDelegate = self
         
@@ -315,7 +341,10 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, Alert
         // Configure the cell...
         
         cell.configureCell(currPost: configurePost);
-        cell.id = configurePost.postID
+        cell.id = configurePost.postID;
+        print("THE ROW IS: ");
+        print(indexPath.row);
+        cell.row = indexPath.row;
         
         if(isFirstOpening) {
             let postToGet = "post" + String(configurePost.postID)
@@ -328,16 +357,10 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, Alert
             }
         }
         
-//        let stringID = String(cell.id)
-        
-//        cell.voteButton.tag = indexPath.row
-//        cell.voteButton.addTarget(self, action: Selector("showAlert:"), for:UIControlEvents.touchUpInside)
-        
         isFirstOpening = false
-
+        
         return cell
     }
-
 
     /*
     // Override to support conditional editing of the table view.
