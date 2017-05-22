@@ -41,7 +41,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         // Do any additional setup after loading the view.
         FIRAuth.auth()!.addStateDidChangeListener() { auth, user in
             if user != nil {
-                //self.performSegue(withIdentifier: "showFeed", sender: nil)
+                self.performSegue(withIdentifier: "showFeed", sender: nil)
             }
         }
     }
@@ -175,9 +175,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                         return
                     }
                 }
-                self.performSegue(withIdentifier: "showFeed", sender: nil)
-                print("Successfully logged in with facebook...")
+                
             })
+            self.performSegue(withIdentifier: "showFeed", sender: nil)
+            print("Successfully logged in with facebook...")
         }
     }
     
