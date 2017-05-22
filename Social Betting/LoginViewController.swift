@@ -191,25 +191,31 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     func getUserInfo() {
         
-        let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name, first_name, last_name"])
-        request?.start { (connection : FBSDKGraphRequestConnection?, result : Any?, error : Error?) -> Void in
-            
-            var infoDictionary:NSDictionary!
-            
-            if error == nil {
-                infoDictionary = result as! [String:AnyObject] as NSDictionary!
-                self.email = infoDictionary["email"] as! String
-                self.id = infoDictionary["id"] as! String
-                self.name = infoDictionary["name"] as! String
-                self.fName = infoDictionary["first_name"] as! String
-                self.lName = infoDictionary["last_name"] as! String
-                self.username = self.fName + "-" + self.lName
-                self.usernameMap?.setObject(self.username as AnyObject?, forKey: 1 as AnyObject?)
-                let url = NSURL(string: "https://graph.facebook.com/\(self.id)/picture?type=large&return_ssl_resources=1")!
-                if let data = NSData(contentsOf: url as URL) {
-                    self.imageView?.image = UIImage(data: data as Data)
+        let concurrentQueue =
+            DispatchQueue(
+                label: "com.ashishkeshan.Social-Betting", // 1
+                attributes: .concurrent) // 2
+        concurrentQueue.sync() {
+            let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name, first_name, last_name"])
+            request?.start { (connection : FBSDKGraphRequestConnection?, result : Any?, error : Error?) -> Void in
+                
+                var infoDictionary:NSDictionary!
+                
+                if error == nil {
+                    infoDictionary = result as! [String:AnyObject] as NSDictionary!
+                    self.email = infoDictionary["email"] as! String
+                    self.id = infoDictionary["id"] as! String
+                    self.name = infoDictionary["name"] as! String
+                    self.fName = infoDictionary["first_name"] as! String
+                    self.lName = infoDictionary["last_name"] as! String
+                    self.username = self.fName + "-" + self.lName
+                    self.usernameMap?.setObject(self.username as AnyObject?, forKey: 1 as AnyObject?)
+                    let url = NSURL(string: "https://graph.facebook.com/\(self.id)/picture?type=large&return_ssl_resources=1")!
+                    if let data = NSData(contentsOf: url as URL) {
+                        self.imageView?.image = UIImage(data: data as Data)
+                    }
+                    print(self.email + " " + self.id + " " + self.name)
                 }
-                print(self.email + " " + self.id + " " + self.name)
             }
         }
 
