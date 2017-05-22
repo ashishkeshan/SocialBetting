@@ -41,7 +41,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         // Do any additional setup after loading the view.
         FIRAuth.auth()!.addStateDidChangeListener() { auth, user in
             if user != nil {
-                self.performSegue(withIdentifier: "showFeed", sender: nil)
+//                self.performSegue(withIdentifier: "showFeed", sender: nil)
             }
         }
     }
@@ -176,15 +176,16 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                 FIRAuth.auth()?.signIn(with: credential) { (user, error) in
                     let userRef = ref.child((user?.uid)!)
+                    print("ABOUT TO PRINT UID")
+                    print((user?.uid)!)
                     userRef.setValue(currUser.toAnyObject())
                     if error != nil {
                         print(error as Any)
                         return
                     }
+                    self.performSegue(withIdentifier: "showFeed", sender: nil)
                 }
-                
             })
-            self.performSegue(withIdentifier: "showFeed", sender: nil)
             print("Successfully logged in with facebook...")
         }
     }
@@ -196,9 +197,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 label: "com.ashishkeshan.Social-Betting", // 1
                 attributes: .concurrent) // 2
         concurrentQueue.sync() {
+            print("IN GET USER INFO")
             let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name, first_name, last_name"])
             request?.start { (connection : FBSDKGraphRequestConnection?, result : Any?, error : Error?) -> Void in
-                
+                print("IN REQUEST START")
                 var infoDictionary:NSDictionary!
                 
                 if error == nil {

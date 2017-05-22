@@ -37,6 +37,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         profileImage.clipsToBounds = true
         
         userRef = ref.child((self.user?.uid)!)
+        print("IN PROFILE ABOUT TO PRINT USER ID")
+        print((self.user?.uid)!)
         profileRef = userRef.child("profileImageURL")
         profileRef.observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? String
