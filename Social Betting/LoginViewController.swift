@@ -41,7 +41,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         // Do any additional setup after loading the view.
         FIRAuth.auth()!.addStateDidChangeListener() { auth, user in
             if user != nil {
-                self.performSegue(withIdentifier: "showFeed", sender: nil)
+                //self.performSegue(withIdentifier: "showFeed", sender: nil)
             }
         }
     }
@@ -172,6 +172,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                     let userRef = ref.child((user?.uid)!)
                     userRef.setValue(currUser.toAnyObject())
                     if error != nil {
+                        print(error as Any)
                         return
                     }
                 }
