@@ -563,10 +563,10 @@
             </objects>
             <point key="canvasLocation" x="2478" y="98"/>
         </scene>
-        <!--Menu Controller-->
+        <!--Table View Controller-->
         <scene sceneID="uZ0-XZ-dTi">
             <objects>
-                <tableViewController id="htZ-MK-1WK" customClass="MenuController" customModule="Social_Betting" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="htZ-MK-1WK" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zQv-EG-tV1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -686,6 +686,9 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.92620444300000004" green="0.93612229820000004" blue="0.94110381600000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <segue destination="ol6-DI-7wf" kind="show" id="zg8-CC-GhR"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -712,7 +715,7 @@
         <image name="sadFace" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5qc-7d-iii"/>
         <segue reference="5ds-3G-DnF"/>
+        <segue reference="5qc-7d-iii"/>
     </inferredMetricsTieBreakers>
 </document>
