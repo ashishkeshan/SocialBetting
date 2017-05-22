@@ -176,7 +176,7 @@
 				TargetAttributes = {
 					75A618CC1E0DE74400A0362E = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = CKF73J7D4M;
+						DevelopmentTeam = 44BCGLCVUS;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -394,7 +394,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = CKF73J7D4M;
+				DEVELOPMENT_TEAM = 44BCGLCVUS;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -416,7 +416,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = CKF73J7D4M;
+				DEVELOPMENT_TEAM = 44BCGLCVUS;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

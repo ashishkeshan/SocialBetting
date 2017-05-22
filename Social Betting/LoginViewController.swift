@@ -41,7 +41,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         // Do any additional setup after loading the view.
         FIRAuth.auth()!.addStateDidChangeListener() { auth, user in
             if user != nil {
-                //self.performSegue(withIdentifier: "showFeed", sender: nil)
+                self.performSegue(withIdentifier: "showFeed", sender: nil)
             }
         }
     }
@@ -118,8 +118,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         if (result?.isCancelled)!{
             return
         }
+        let concurrentQueue =
+            DispatchQueue(
+                label: "com.ashishkeshan.Social-Betting", // 1
+                attributes: .concurrent) // 2
+        concurrentQueue.sync() {
+           getUserInfo()
+        }
         
-        getUserInfo()
         
         let fbRequest = FBSDKGraphRequest(graphPath:"/me/friends", parameters: nil)
         fbRequest?.start { (connection : FBSDKGraphRequestConnection?, result : Any?, error : Error?) -> Void in
