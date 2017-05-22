@@ -81,33 +81,46 @@ class BetFeedCellTableViewCell: UITableViewCell {
         
         let testRef = singlePostRef.child("likes")
         
-        testRef.observeSingleEvent(of: .value) { (snap: FIRDataSnapshot) in
-            if(snap.exists()) {
-                print("EXISTS")
-                print(snap.value)
-//                likeValue = snap.value as! Int
-                let saveKey = "post" + stringID
-                if(self.likeButton.titleColor(for: UIControlState.normal) != UIColor.red) {
-                    singlePostRef.updateChildValues(["likes":(snap.value as! Int) + 1])
-                    self.likeButton.setTitleColor(UIColor.red, for: UIControlState.normal)
-                    var colorToSetAsDefault : UIColor = UIColor.red
-                    var data : NSData = NSKeyedArchiver.archivedData(withRootObject: colorToSetAsDefault) as NSData
-                    UserDefaults.standard.set(data, forKey: saveKey)
-                    UserDefaults.standard.synchronize()
-                    print("SET DEFAULT USER COLOR TO RED")
-                }
-                else {
-                    singlePostRef.updateChildValues(["likes":(snap.value as! Int) - 1])
-                    self.likeButton.setTitleColor(UIColor.blue, for: UIControlState.normal)
-                    var colorToSetAsDefault : UIColor = UIColor.blue
-                    var data : NSData = NSKeyedArchiver.archivedData(withRootObject: colorToSetAsDefault) as NSData
-                    UserDefaults.standard.set(data, forKey: saveKey)
-                    UserDefaults.standard.synchronize()
-                    print("SET DEFAULT USER COLOR TO BLUE")
-                }
-            }
-        }
         
+//        let concurrentQueue =
+//            DispatchQueue(
+//                label: "com.ashishkeshan.Social-Betting", // 1
+//                attributes: .concurrent) // 2
+//        concurrentQueue.sync() {
+        let myGroup = DispatchGroup()
+            myGroup.enter()
+            testRef.observeSingleEvent(of: .value) { (snap: FIRDataSnapshot) in
+                if(snap.exists()) {
+                    print("EXISTS")
+                    print(snap.value)
+    //                likeValue = snap.value as! Int
+                    let saveKey = "post" + stringID
+                    if(self.likeButton.titleColor(for: UIControlState.normal) != UIColor.red) {
+                        singlePostRef.updateChildValues(["likes":(snap.value as! Int) + 1])
+                        self.likeButton.setTitleColor(UIColor.red, for: UIControlState.normal)
+                        var colorToSetAsDefault : UIColor = UIColor.red
+                        var data : NSData = NSKeyedArchiver.archivedData(withRootObject: colorToSetAsDefault) as NSData
+                        UserDefaults.standard.set(data, forKey: saveKey)
+                        UserDefaults.standard.synchronize()
+                        print("SET DEFAULT USER COLOR TO RED")
+                    }
+                    else {
+                        singlePostRef.updateChildValues(["likes":(snap.value as! Int) - 1])
+                        self.likeButton.setTitleColor(UIColor.blue, for: UIControlState.normal)
+                        var colorToSetAsDefault : UIColor = UIColor.blue
+                        var data : NSData = NSKeyedArchiver.archivedData(withRootObject: colorToSetAsDefault) as NSData
+                        UserDefaults.standard.set(data, forKey: saveKey)
+                        UserDefaults.standard.synchronize()
+                        print("SET DEFAULT USER COLOR TO BLUE")
+                    }
+                }
+                myGroup.leave()
+            }
+            myGroup.notify(queue: DispatchQueue.main, execute: {
+                print("LIKE VALUE IS:")
+                print(likeValue)
+            })
+//        }
         
         
         // ---------------------------------- COME BACK TO THIS --------------------------- //
@@ -116,9 +129,7 @@ class BetFeedCellTableViewCell: UITableViewCell {
 //        if (userSelectedColor != nil) {
         
 //        }
-        
-        print("LIKE VALUE IS:")
-        print(likeValue)
+    
     }
     
     @IBAction func commentButtonDidTouch(_ sender: Any) {
