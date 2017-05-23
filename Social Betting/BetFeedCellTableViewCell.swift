@@ -10,7 +10,12 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-protocol AlertProtocol : class {    // 'class' means only class types can implement it
+//protocol AlertProtocol : class {    // 'class' means only class types can implement it
+//    func showAlert(cell: BetFeedCellTableViewCell) -> Void
+//}
+
+protocol BetFeedTableViewCellDelegate : class {
+    func likeButtonDidTouch(cell: BetFeedCellTableViewCell) -> Void
     func showAlert(cell: BetFeedCellTableViewCell) -> Void
 }
 
@@ -41,7 +46,8 @@ class BetFeedCellTableViewCell: UITableViewCell {
     
     let postFef = FIRDatabase.database().reference(withPath: "posts")
     
-    var cellDelegate: AlertProtocol?
+//    var cellDelegate: AlertProtocol?
+    var delegate: BetFeedTableViewCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -69,74 +75,16 @@ class BetFeedCellTableViewCell: UITableViewCell {
     }
     
     @IBAction func likeButtonDidTouch(_ sender: Any) {
-        
-        print("THE ID IS: ")
-        print(id)
-        
-        var likeValue: Int = 0
-        
-        let stringID = String(id)
-        
-        let singlePostRef = postFef.child(stringID)
-        
-        let testRef = singlePostRef.child("likes")
-        
-        
-//        let concurrentQueue =
-//            DispatchQueue(
-//                label: "com.ashishkeshan.Social-Betting", // 1
-//                attributes: .concurrent) // 2
-//        concurrentQueue.sync() {
-        let myGroup = DispatchGroup()
-            myGroup.enter()
-            testRef.observeSingleEvent(of: .value) { (snap: FIRDataSnapshot) in
-                if(snap.exists()) {
-                    print("EXISTS")
-                    print(snap.value)
-    //                likeValue = snap.value as! Int
-                    let saveKey = "post" + stringID
-                    if(self.likeButton.titleColor(for: UIControlState.normal) != UIColor.red) {
-                        singlePostRef.updateChildValues(["likes":(snap.value as! Int) + 1])
-                        self.likeButton.setTitleColor(UIColor.red, for: UIControlState.normal)
-                        var colorToSetAsDefault : UIColor = UIColor.red
-                        var data : NSData = NSKeyedArchiver.archivedData(withRootObject: colorToSetAsDefault) as NSData
-                        UserDefaults.standard.set(data, forKey: saveKey)
-                        UserDefaults.standard.synchronize()
-                        print("SET DEFAULT USER COLOR TO RED")
-                    }
-                    else {
-                        singlePostRef.updateChildValues(["likes":(snap.value as! Int) - 1])
-                        self.likeButton.setTitleColor(UIColor.blue, for: UIControlState.normal)
-                        var colorToSetAsDefault : UIColor = UIColor.blue
-                        var data : NSData = NSKeyedArchiver.archivedData(withRootObject: colorToSetAsDefault) as NSData
-                        UserDefaults.standard.set(data, forKey: saveKey)
-                        UserDefaults.standard.synchronize()
-                        print("SET DEFAULT USER COLOR TO BLUE")
-                    }
-                }
-                myGroup.leave()
-            }
-            myGroup.notify(queue: DispatchQueue.main, execute: {
-                print("LIKE VALUE IS:")
-                print(likeValue)
-            })
-//        }
-        
-        
-        // ---------------------------------- COME BACK TO THIS --------------------------- //
-//        var userSelectedColor : NSData? = (UserDefaults.standard.object(forKey: saveKey) as? NSData)
-//
-//        if (userSelectedColor != nil) {
-        
-//        }
-    
+        print("CHECKING LIKE BUTTON DELEGATE")
+        self.delegate?.likeButtonDidTouch(cell: self)
     }
+    
     
     @IBAction func commentButtonDidTouch(_ sender: Any) {
     }
     
     @IBAction func voteButtonDidTouch(_ sender: Any) {
-        self.cellDelegate?.showAlert(cell: self)
+        self.delegate?.showAlert(cell: self)
     }
     
     

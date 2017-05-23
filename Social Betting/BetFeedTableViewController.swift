@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class BetFeedTableViewController: UIViewController, UITableViewDataSource, AlertProtocol {
+class BetFeedTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, BetFeedTableViewCellDelegate {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var sideMenuButton: UIBarButtonItem!
@@ -310,7 +310,74 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, Alert
             
             self.present(alert, animated: true, completion: nil)
         })
-}
+    }
+    
+    func likeButtonDidTouch(cell: BetFeedCellTableViewCell) {
+        
+        let indexPath = self.tableView.indexPath(for: cell)
+        print("GOING TO PRINT INDEXPATH ROW OF LIKE CELL")
+        print(indexPath!.row)
+        rowToReload = indexPath!.row
+        print("THE ID IS: ")
+        print(cell.id)
+        
+        var likeValue: Int = 0
+        
+        let stringID = String(cell.id)
+        
+        let singlePostRef = postFef.child(stringID)
+        
+        let testRef = singlePostRef.child("likes")
+        
+        
+        //        let concurrentQueue =
+        //            DispatchQueue(
+        //                label: "com.ashishkeshan.Social-Betting", // 1
+        //                attributes: .concurrent) // 2
+        //        concurrentQueue.sync() {
+        let myGroup = DispatchGroup()
+        myGroup.enter()
+        testRef.observeSingleEvent(of: .value) { (snap: FIRDataSnapshot) in
+            if(snap.exists()) {
+                print("EXISTS")
+                print(snap.value)
+                //                likeValue = snap.value as! Int
+                let saveKey = "post" + stringID
+                if(cell.likeButton.titleColor(for: UIControlState.normal) != UIColor.red) {
+                    singlePostRef.updateChildValues(["likes":(snap.value as! Int) + 1])
+                    cell.likeButton.setTitleColor(UIColor.red, for: UIControlState.normal)
+                    var colorToSetAsDefault : UIColor = UIColor.red
+                    var data : NSData = NSKeyedArchiver.archivedData(withRootObject: colorToSetAsDefault) as NSData
+                    UserDefaults.standard.set(data, forKey: saveKey)
+                    UserDefaults.standard.synchronize()
+                    print("SET DEFAULT USER COLOR TO RED")
+                }
+                else {
+                    singlePostRef.updateChildValues(["likes":(snap.value as! Int) - 1])
+                    cell.likeButton.setTitleColor(UIColor.blue, for: UIControlState.normal)
+                    var colorToSetAsDefault : UIColor = UIColor.blue
+                    var data : NSData = NSKeyedArchiver.archivedData(withRootObject: colorToSetAsDefault) as NSData
+                    UserDefaults.standard.set(data, forKey: saveKey)
+                    UserDefaults.standard.synchronize()
+                    print("SET DEFAULT USER COLOR TO BLUE")
+                }
+            }
+            myGroup.leave()
+        }
+        myGroup.notify(queue: DispatchQueue.main, execute: {
+            print("LIKE VALUE IS:")
+            print(likeValue)
+        })
+        //        }
+        
+        
+        // ---------------------------------- COME BACK TO THIS --------------------------- //
+        //        var userSelectedColor : NSData? = (UserDefaults.standard.object(forKey: saveKey) as? NSData)
+        //
+        //        if (userSelectedColor != nil) {
+        
+        //        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -329,12 +396,19 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, Alert
         return posts.count
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        rowToReload = indexPath.row
+        print("ABOUT TO PRINT ROWTORELOAD")
+        print(rowToReload)
+        self.tableView.reloadRows(at: [indexPath as IndexPath], with: .top)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BetFeedCellTableViewCell", for: indexPath) as! BetFeedCellTableViewCell
         
         print("IN CELLFORROWATINDEXPATH")
 
-        cell.cellDelegate = self
+        cell.delegate = self
         
         let configurePost = posts[indexPath.row]
         
