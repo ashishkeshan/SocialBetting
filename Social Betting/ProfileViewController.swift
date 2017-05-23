@@ -50,7 +50,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         usernameRef.observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? String
-            self.usernameLabel.text = value
+            self.usernameLabel.text = "@" + value
         })
         
         profileRef.observeSingleEvent(of: .value, with: { (snapshot) in
