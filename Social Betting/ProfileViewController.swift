@@ -40,6 +40,19 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         print("IN PROFILE ABOUT TO PRINT USER ID")
         print((self.user?.uid)!)
         profileRef = userRef.child("profileImageURL")
+        let fullnameRef = userRef.child("fullName")
+        let usernameRef = userRef.child("username")
+        
+        fullnameRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? String
+            self.fullNameLabel.text = value
+        })
+        
+        usernameRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? String
+            self.usernameLabel.text = value
+        })
+        
         profileRef.observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? String
             if value != nil {
