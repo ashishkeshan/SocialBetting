@@ -72,9 +72,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     }
                     
                 }).resume()
+                
             }
         })
-// REVEAL VIEW CONTROLLER
+// REVEAL VIEW CONTROLLER d
 //        if self.revealViewController() != nil {
 //            menuButton?.target = self.revealViewController()
 //            menuButton?.action = "revealToggle:"
