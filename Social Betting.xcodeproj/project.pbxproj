@@ -17,8 +17,6 @@
 		75ABF10F1E1F352A00B1AC93 /* silhouette.png in Resources */ = {isa = PBXBuildFile; fileRef = 75ABF10E1E1F352A00B1AC93 /* silhouette.png */; };
 		9F5B70C84F9746A112474236 /* Pods_Social_Betting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61065E678781EF03087BC11C /* Pods_Social_Betting.framework */; };
 		B928C1751E3DFAFC00A7AA55 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B928C1741E3DFAFC00A7AA55 /* CommentsViewController.swift */; };
-		B92ED39F1ED524CD00E5599C /* hamburger_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = B92ED39D1ED524CD00E5599C /* hamburger_menu.png */; };
-		B92ED3A01ED524CD00E5599C /* vertical_dots.png in Resources */ = {isa = PBXBuildFile; fileRef = B92ED39E1ED524CD00E5599C /* vertical_dots.png */; };
 		B93649A21ED506B000B01591 /* SlideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93649A11ED506B000B01591 /* SlideController.swift */; };
 		B93649A41ED5072F00B01591 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93649A31ED5072F00B01591 /* BaseTableViewCell.swift */; };
 		B93649A61ED5075C00B01591 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93649A51ED5075C00B01591 /* MenuViewController.swift */; };
@@ -204,11 +202,9 @@
 			files = (
 				75ABF10F1E1F352A00B1AC93 /* silhouette.png in Resources */,
 				B9ABD1601E3EE75400FFDDCF /* Main.storyboard in Resources */,
-				B92ED39F1ED524CD00E5599C /* hamburger_menu.png in Resources */,
 				75A618DB1E0DE74400A0362E /* LaunchScreen.storyboard in Resources */,
 				752ADBA11E15E5FE008BA7E4 /* GoogleService-Info.plist in Resources */,
 				75A618D81E0DE74400A0362E /* Assets.xcassets in Resources */,
-				B92ED3A01ED524CD00E5599C /* vertical_dots.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
