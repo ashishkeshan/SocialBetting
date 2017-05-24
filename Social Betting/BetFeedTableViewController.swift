@@ -31,18 +31,19 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, UITab
     
     var isFirstOpening: Bool = true
     var rowToReload: Int = 0;
+    var indexPathToReload: IndexPath? = nil;
     
     let postFef = FIRDatabase.database().reference(withPath: "posts");
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("IN VIEWDIDLOAD")
-        
-        if self.revealViewController() != nil {
-            sideMenuButton?.target = self.revealViewController()
-            sideMenuButton?.action = "revealToggle:"
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
+        // REVEAL VIEW CONTROLLER
+//        if self.revealViewController() != nil {
+//            sideMenuButton?.target = self.revealViewController()
+//            sideMenuButton?.action = "revealToggle:"
+//            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+//        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -66,6 +67,9 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, UITab
                 if(self.rowToReload != 0) {
                     print("RELOADING ONLY ONE ROW")
                     let indexPath = IndexPath(item: self.rowToReload, section: 0)
+                    let configurePost = self.posts[self.rowToReload]
+                    let cell = self.tableView.cellForRow(at: self.indexPathToReload!) as! BetFeedCellTableViewCell
+                    cell.configureCell(currPost: configurePost);
                     self.tableView.reloadRows(at: [indexPath], with: .top)
                     self.rowToReload = 0;
                 }
@@ -83,6 +87,15 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, UITab
                 }
 //            }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setNavigationBarItem(viewController: "BetFeedTableViewController")
+        
+//        toPopulate = Client.sharedInstance.json
+        
+        self.tableView.reloadData()
     }
     
     @IBAction func addButtonDidTouch(_ sender: Any) {
@@ -318,6 +331,7 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, UITab
         print("GOING TO PRINT INDEXPATH ROW OF LIKE CELL")
         print(indexPath!.row)
         rowToReload = indexPath!.row
+        indexPathToReload = indexPath!
         print("THE ID IS: ")
         print(cell.id)
         
@@ -325,6 +339,7 @@ class BetFeedTableViewController: UIViewController, UITableViewDataSource, UITab
         
         let stringID = String(cell.id)
         
+        let postFef = FIRDatabase.database().reference(withPath: "posts")
         let singlePostRef = postFef.child(stringID)
         
         let testRef = singlePostRef.child("likes")

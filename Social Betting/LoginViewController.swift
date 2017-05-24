@@ -41,7 +41,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         // Do any additional setup after loading the view.
         FIRAuth.auth()!.addStateDidChangeListener() { auth, user in
             if user != nil {
-                self.performSegue(withIdentifier: "showFeed", sender: nil)
+//                self.performSegue(withIdentifier: "showFeed", sender: nil)
             }
         }
     }
@@ -183,7 +183,18 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                         print(error as Any)
                         return
                     }
-                    self.performSegue(withIdentifier: "showFeed", sender: nil)
+//                    self.performSegue(withIdentifier: "showFeed", sender: nil)
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let mainViewController = storyboard.instantiateViewController(withIdentifier: "BetFeedTableViewController") as! BetFeedTableViewController
+                    let leftViewController = storyboard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+                    let nvc: UINavigationController = UINavigationController(rootViewController: mainViewController)
+                    
+                    let slideMenuController = SlideController(mainViewController: nvc, leftMenuViewController: leftViewController)
+                    UIApplication.shared.delegate?.window??.rootViewController = slideMenuController
+                    
+                    //mainViewController.toPopulate = sendMessage
+                    
+                    self.navigationController?.pushViewController(mainViewController, animated: true)
                 }
             })
             print("Successfully logged in with facebook...")

@@ -10,10 +10,6 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-//protocol AlertProtocol : class {    // 'class' means only class types can implement it
-//    func showAlert(cell: BetFeedCellTableViewCell) -> Void
-//}
-
 protocol BetFeedTableViewCellDelegate : class {
     func likeButtonDidTouch(cell: BetFeedCellTableViewCell) -> Void
     func showAlert(cell: BetFeedCellTableViewCell) -> Void
@@ -78,7 +74,6 @@ class BetFeedCellTableViewCell: UITableViewCell {
         print("CHECKING LIKE BUTTON DELEGATE")
         self.delegate?.likeButtonDidTouch(cell: self)
     }
-    
     
     @IBAction func commentButtonDidTouch(_ sender: Any) {
     }
