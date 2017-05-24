@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ol6-DI-7wf">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ol6-DI-7wf">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -263,6 +263,7 @@
                                             <state key="normal" title="Comment"/>
                                             <connections>
                                                 <action selector="commentButtonDidTouch:" destination="qyn-Nj-put" eventType="touchUpInside" id="F74-Sg-8SX"/>
+                                                <segue destination="VCu-t1-iJB" kind="show" id="EQk-94-xOF"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jmb-ed-7wB">
@@ -480,16 +481,17 @@
                     <connections>
                         <outlet property="sideMenuButton" destination="b4b-pW-kTL" id="hTW-O3-rxV"/>
                         <outlet property="tableView" destination="CIM-a7-udv" id="Cqd-zg-RqH"/>
+                        <segue destination="VCu-t1-iJB" kind="show" id="MLl-RM-tLp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hsS-qU-06U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2884" y="156"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Bet-->
         <scene sceneID="HlE-Xx-jAF">
             <objects>
-                <tableViewController id="VCu-t1-iJB" customClass="CommentsViewController" sceneMemberID="viewController">
+                <tableViewController title="Bet" id="VCu-t1-iJB" customClass="CommentsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="79" sectionHeaderHeight="28" sectionFooterHeight="28" id="qIQ-u4-ST9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -514,13 +516,6 @@
                             <outlet property="delegate" destination="VCu-t1-iJB" id="EAz-wT-Qlr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="apa-Tb-j3l">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="dMJ-91-PtB">
-                            <connections>
-                                <segue destination="VV1-Of-eMZ" kind="show" id="5ds-3G-DnF"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XRD-Hn-c9X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -567,6 +562,7 @@
         <image name="sadFace" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5ds-3G-DnF"/>
+        <segue reference="5qc-7d-iii"/>
+        <segue reference="EQk-94-xOF"/>
     </inferredMetricsTieBreakers>
 </document>
