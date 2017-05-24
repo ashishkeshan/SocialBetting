@@ -17,12 +17,12 @@
 		75ABF10F1E1F352A00B1AC93 /* silhouette.png in Resources */ = {isa = PBXBuildFile; fileRef = 75ABF10E1E1F352A00B1AC93 /* silhouette.png */; };
 		9F5B70C84F9746A112474236 /* Pods_Social_Betting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61065E678781EF03087BC11C /* Pods_Social_Betting.framework */; };
 		B928C1751E3DFAFC00A7AA55 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B928C1741E3DFAFC00A7AA55 /* CommentsViewController.swift */; };
+		B92ED39F1ED524CD00E5599C /* hamburger_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = B92ED39D1ED524CD00E5599C /* hamburger_menu.png */; };
+		B92ED3A01ED524CD00E5599C /* vertical_dots.png in Resources */ = {isa = PBXBuildFile; fileRef = B92ED39E1ED524CD00E5599C /* vertical_dots.png */; };
 		B93649A21ED506B000B01591 /* SlideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93649A11ED506B000B01591 /* SlideController.swift */; };
 		B93649A41ED5072F00B01591 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93649A31ED5072F00B01591 /* BaseTableViewCell.swift */; };
 		B93649A61ED5075C00B01591 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93649A51ED5075C00B01591 /* MenuViewController.swift */; };
 		B93649A81ED5078F00B01591 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93649A71ED5078F00B01591 /* UIViewController.swift */; };
-		B93649AA1ED50F8400B01591 /* hamburger_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = B93649A91ED50F8400B01591 /* hamburger_menu.png */; };
-		B93649AC1ED513D900B01591 /* vertical_dots.png in Resources */ = {isa = PBXBuildFile; fileRef = B93649AB1ED513D900B01591 /* vertical_dots.png */; };
 		B958D7F81E246DF5008F1299 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = B958D7F71E246DF5008F1299 /* Post.swift */; };
 		B96781CC1E19AA2800609F23 /* BetFeedCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96781CB1E19AA2800609F23 /* BetFeedCellTableViewCell.swift */; };
 		B98F51661E184D5300BD11DF /* BetFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98F51651E184D5300BD11DF /* BetFeedTableViewController.swift */; };
@@ -44,12 +44,12 @@
 		75ABF10E1E1F352A00B1AC93 /* silhouette.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = silhouette.png; sourceTree = "<group>"; };
 		9B4410C77F552894DB3A0A78 /* Pods-Social Betting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Social Betting.release.xcconfig"; path = "Pods/Target Support Files/Pods-Social Betting/Pods-Social Betting.release.xcconfig"; sourceTree = "<group>"; };
 		B928C1741E3DFAFC00A7AA55 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		B92ED39D1ED524CD00E5599C /* hamburger_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hamburger_menu.png; path = ../../../Hitchhikers/Hitchhikers/Hitchhikers/hamburger_menu.png; sourceTree = "<group>"; };
+		B92ED39E1ED524CD00E5599C /* vertical_dots.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = vertical_dots.png; path = ../../../Hitchhikers/Hitchhikers/Hitchhikers/vertical_dots.png; sourceTree = "<group>"; };
 		B93649A11ED506B000B01591 /* SlideController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideController.swift; sourceTree = "<group>"; };
 		B93649A31ED5072F00B01591 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		B93649A51ED5075C00B01591 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		B93649A71ED5078F00B01591 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		B93649A91ED50F8400B01591 /* hamburger_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hamburger_menu.png; path = ../../../Hitchhikers/Hitchhikers/Hitchhikers/hamburger_menu.png; sourceTree = "<group>"; };
-		B93649AB1ED513D900B01591 /* vertical_dots.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = vertical_dots.png; path = ../../../Hitchhikers/Hitchhikers/Hitchhikers/vertical_dots.png; sourceTree = "<group>"; };
 		B958D7F71E246DF5008F1299 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		B96781CB1E19AA2800609F23 /* BetFeedCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetFeedCellTableViewCell.swift; sourceTree = "<group>"; };
 		B98F51651E184D5300BD11DF /* BetFeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetFeedTableViewController.swift; sourceTree = "<group>"; };
@@ -132,8 +132,8 @@
 		B9B548BC1E1B425500569631 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				B93649AB1ED513D900B01591 /* vertical_dots.png */,
-				B93649A91ED50F8400B01591 /* hamburger_menu.png */,
+				B92ED39D1ED524CD00E5599C /* hamburger_menu.png */,
+				B92ED39E1ED524CD00E5599C /* vertical_dots.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -204,11 +204,11 @@
 			files = (
 				75ABF10F1E1F352A00B1AC93 /* silhouette.png in Resources */,
 				B9ABD1601E3EE75400FFDDCF /* Main.storyboard in Resources */,
-				B93649AA1ED50F8400B01591 /* hamburger_menu.png in Resources */,
+				B92ED39F1ED524CD00E5599C /* hamburger_menu.png in Resources */,
 				75A618DB1E0DE74400A0362E /* LaunchScreen.storyboard in Resources */,
 				752ADBA11E15E5FE008BA7E4 /* GoogleService-Info.plist in Resources */,
 				75A618D81E0DE74400A0362E /* Assets.xcassets in Resources */,
-				B93649AC1ED513D900B01591 /* vertical_dots.png in Resources */,
+				B92ED3A01ED524CD00E5599C /* vertical_dots.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
